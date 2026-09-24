@@ -20,17 +20,17 @@ import travelDog from "@/assets/travel-dog.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "PetPass Export — Pet Travel Documents for the EU, Australia & New Zealand" },
+      { title: "PetPass Export — Pet Travel Documents for the EU & Australia" },
       {
         name: "description",
       content:
-          "A UK Official Veterinarian providing home visits for Animal Health Certificates (AHCs) for EU travel and export certification for Australia and New Zealand. Stress-free pet travel paperwork, completed at your home.",
+          "A UK Official Veterinarian providing home visits for Animal Health Certificates (AHCs) for EU travel and export certification for Australia. Stress-free pet travel paperwork, completed at your home.",
       },
-      { property: "og:title", content: "PetPass Export — Pet Travel Documents for the EU, Australia & New Zealand" },
+      { property: "og:title", content: "PetPass Export — Pet Travel Documents for the EU & Australia" },
       {
         property: "og:description",
         content:
-          "Animal Health Certificates for EU travel and export certification for Australia & New Zealand, completed at your home by a UK Official Veterinarian.",
+          "Animal Health Certificates for EU travel and export certification for Australia, completed at your home by a UK Official Veterinarian.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -64,24 +64,12 @@ const services = [
     icon: Plane,
     title: "Australia Export Certification",
     description:
-      "Australia has some of the strictest biosecurity rules in the world. I manage the full Export Health Certificate process — from rabies titre testing timelines to the mandatory quarantine booking paperwork — with examinations and sampling done at your home.",
+      "Australia has some of the strictest biosecurity rules in the world. I manage the full Export Health Certificate process — from rabies titre testing timelines to the mandatory quarantine booking paperwork — with examinations done at your home.",
     points: [
       "Export Health Certificate (EHC) via APHA",
-      "Rabies antibody (RNATT) blood test coordination",
+      "RNATT: I certify the laboratory results once the blood draw has been completed by another OV",
       "180-day timeline planning from blood draw",
       "Liaison with your chosen pet transport agent",
-    ],
-  },
-  {
-    icon: Globe2,
-    title: "New Zealand Export Certification",
-    description:
-      "Moving to New Zealand requires an import permit, MPI-approved quarantine arrangements, and a precise schedule of treatments and tests. I handle the veterinary side end to end, visiting you at home for each step.",
-    points: [
-      "MPI import permit support & document checks",
-      "Pre-export treatments and laboratory testing",
-      "Final health examination & certification within 4 days of travel",
-      "Quarantine facility coordination",
     ],
   },
 ];
@@ -125,6 +113,10 @@ const faqs = [
   {
     q: "How long does the Australia process take?",
     a: "Plan for at least 7–8 months. The rabies antibody blood test must be done at least 180 days before export, and your pet will spend a minimum of 10 days in quarantine on arrival. I'll build the full timeline with you.",
+  },
+  {
+    q: "Do you carry out the blood draw for the Australia rabies titre test (RNATT)?",
+    a: "No — I don't perform blood draws. Once the sample has been taken by another OV and tested at the appropriate laboratory, I can certify the results and complete the rest of your export documentation.",
   },
   {
     q: "Can you help if my dates change?",
@@ -172,8 +164,8 @@ function Index() {
           </h1>
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground">
             Animal Health Certificates for EU travel, and full export certification for
-            Australia and New Zealand — completed by an Official Veterinarian in the
-            comfort of your own home, so your pet stays calm and you skip the clinic trip.
+            Australia — completed by an Official Veterinarian in the comfort of your own
+            home, so your pet stays calm and you skip the clinic trip.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
@@ -194,10 +186,10 @@ function Index() {
               <Clock3 className="h-4 w-4 text-primary" /> Flexible evening & weekend visits
             </span>
             <span className="flex items-center gap-2">
-              <Microscope className="h-4 w-4 text-primary" /> Titre testing arranged
+              <Microscope className="h-4 w-4 text-primary" /> RNATT result certification
             </span>
             <span className="flex items-center gap-2">
-              <Globe2 className="h-4 w-4 text-primary" /> EU · AU · NZ specialists
+              <Globe2 className="h-4 w-4 text-primary" /> EU & Australia specialists
             </span>
           </div>
         </div>
@@ -217,9 +209,9 @@ function Index() {
         <div className="mx-auto max-w-6xl px-6 py-20">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">What I do</p>
           <h2 className="mt-3 max-w-2xl text-3xl font-medium md:text-4xl">
-            One vet, your doorstep, every destination covered
+            One vet, your doorstep, every document covered
           </h2>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
+          <div className="mt-12 grid gap-8 md:grid-cols-2">
             {services.map((s) => (
               <article
                 key={s.title}
@@ -240,6 +232,18 @@ function Index() {
                 </ul>
               </article>
             ))}
+          </div>
+          <div className="mt-10 flex flex-col items-start gap-3 rounded-2xl border border-dashed border-border bg-card/60 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-muted-foreground">
+              <span className="font-semibold text-foreground">Travelling elsewhere?</span>{" "}
+              Requirements vary by destination — get in touch and we'll see how we can help.
+            </p>
+            <a
+              href="#contact"
+              className="shrink-0 rounded-full border border-border bg-background px-5 py-2 text-sm font-semibold transition-colors hover:bg-secondary"
+            >
+              Ask about your destination
+            </a>
           </div>
         </div>
       </section>
