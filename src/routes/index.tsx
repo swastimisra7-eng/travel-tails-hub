@@ -52,11 +52,11 @@ const services = [
     icon: FileCheck2,
     title: "Animal Health Certificates (EU)",
     description:
-      "Since Brexit, UK pet passports are no longer valid for EU travel. I issue Animal Health Certificates at your home — valid for entry to the EU and Northern Ireland, covering up to 5 pets, onward travel for 4 months, and re-entry to Great Britain.",
+      "Under the EU rules that took effect on 22 April 2026, GB residents should no longer rely on EU pet passports — an Animal Health Certificate is now the document to travel with. I issue AHCs at your home, valid for entry to the EU and Northern Ireland.",
     points: [
       "Valid for 10 days for EU entry from date of issue",
+      "Up to 6 months onward travel in the EU & re-entry to GB",
       "Microchip & rabies vaccination checks included",
-      "Tapeworm treatment guidance for return journeys",
       "Completed at your home — no stressful clinic trip",
     ],
   },
@@ -107,8 +107,20 @@ const faqs = [
     a: "An AHC must be issued no more than 10 days before you enter the EU. I recommend booking 2–4 weeks ahead, and making sure your pet's rabies vaccination is at least 21 days old before the home visit.",
   },
   {
-    q: "My pet has an EU pet passport issued abroad — do I still need an AHC?",
-    a: "A valid EU pet passport issued in an EU member state or Northern Ireland can still be used. Passports issued in Great Britain are no longer valid for EU travel, so an AHC is required instead.",
+    q: "My pet has an EU pet passport — can I still use it?",
+    a: "Under the EU rules that took effect on 22 April 2026, EU pet passports should no longer be used by people whose main home is in Great Britain — even passports issued before that date may no longer be accepted for EU entry. An Animal Health Certificate is now the recommended document. You can still use an EU pet passport for your return journey to Great Britain.",
+  },
+  {
+    q: "How long is an Animal Health Certificate valid for?",
+    a: "You still need a new AHC for each trip from Great Britain to the EU, and it must be issued within 10 days of arrival. But once you're in the EU, it now covers onward travel for up to six months and re-entry to Great Britain — as long as your pet's rabies vaccination stays valid.",
+  },
+  {
+    q: "Can someone else travel with my pet?",
+    a: "Yes, but extra paperwork is needed. If you're not travelling with your pet, the pet must travel within five days of you, and the person accompanying them must carry your written permission alongside the pet's travel document. I can help you prepare this at the home visit.",
+  },
+  {
+    q: "How many pets can I take?",
+    a: "Non-commercial travel into the EU is now limited to five pets per private vehicle (previously five per person). The five-pet limit for travelling on foot is unchanged. Exceptions apply for pets travelling to competitions, events or training where specific conditions are met — ask me if this applies to you.",
   },
   {
     q: "How long does the Australia process take?",
