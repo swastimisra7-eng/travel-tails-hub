@@ -91,19 +91,19 @@ const steps = [
     icon: Phone,
     title: "Tell us your plans",
     description:
-      "Share your destination, travel dates, and your pet's details. We map out every deadline backwards from your departure day.",
+      "Share your destination, travel dates, and your pet's details. I map out every deadline backwards from your departure day.",
   },
   {
     icon: Syringe,
     title: "Vaccines, chips & tests",
     description:
-      "We verify microchips, rabies vaccinations and any blood tests your destination requires — and schedule anything that's missing.",
+      "I verify microchips, rabies vaccinations and any blood tests your destination requires — and arrange anything that's missing.",
   },
   {
     icon: ClipboardList,
-    title: "Certification appointment",
+    title: "Home certification visit",
     description:
-      "Your pet attends a certification appointment with our Official Veterinarian, who examines them and issues the documents.",
+      "I visit your home at a time that suits you, examine your pet in familiar surroundings, and issue the documents there and then.",
   },
   {
     icon: CalendarCheck2,
