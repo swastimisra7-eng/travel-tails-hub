@@ -310,11 +310,11 @@ function Index() {
       <section id="contact" className="mx-auto max-w-6xl px-6 py-20">
         <div className="rounded-3xl bg-primary px-8 py-14 text-center text-primary-foreground md:px-16">
           <h2 className="text-3xl font-medium md:text-4xl">
-            Tell us where you're headed — we'll do the rest
+            Tell me where you're headed — I'll come to you
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-primary-foreground/85">
-            Every journey starts with a short consultation. Share your destination and dates,
-            and we'll send back a personalised document plan within one working day.
+            Every journey starts with a short phone consultation. Share your destination and dates,
+            and I'll send back a personalised document plan and home-visit schedule within one working day.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <a
