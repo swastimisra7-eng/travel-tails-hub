@@ -215,7 +215,7 @@ function Index() {
       {/* Services */}
       <section id="services" className="bg-secondary/50">
         <div className="mx-auto max-w-6xl px-6 py-20">
-          <p className="text-sm font-semibold uppercase tracking-widest text-primary">Our services</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-primary">What I do</p>
           <h2 className="mt-3 max-w-2xl text-3xl font-medium md:text-4xl">
             One vet, your doorstep, every destination covered
           </h2>
