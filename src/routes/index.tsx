@@ -115,6 +115,10 @@ const faqs = [
     a: "Plan for at least 7–8 months. The rabies antibody blood test must be done at least 180 days before export, and your pet will spend a minimum of 10 days in quarantine on arrival. I'll build the full timeline with you.",
   },
   {
+    q: "Do you carry out the blood draw for the Australia rabies titre test (RNATT)?",
+    a: "No — I don't perform blood draws. Once the sample has been taken by another OV and tested at the appropriate laboratory, I can certify the results and complete the rest of your export documentation.",
+  },
+  {
     q: "Can you help if my dates change?",
     a: "Yes — export documentation is date-sensitive, so if your travel moves, get in touch as early as possible and I'll re-issue or re-schedule whatever is affected.",
   },
@@ -207,7 +211,7 @@ function Index() {
           <h2 className="mt-3 max-w-2xl text-3xl font-medium md:text-4xl">
             One vet, your doorstep, every destination covered
           </h2>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
+          <div className="mt-12 grid gap-8 md:grid-cols-2">
             {services.map((s) => (
               <article
                 key={s.title}
