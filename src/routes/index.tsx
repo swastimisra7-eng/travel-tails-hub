@@ -116,7 +116,7 @@ const steps = [
 const faqs = [
   {
     q: "How far in advance should I book an AHC appointment?",
-    a: "An AHC must be issued no more than 10 days before you enter the EU. We recommend booking 2–4 weeks ahead, and making sure your pet's rabies vaccination is at least 21 days old before the appointment.",
+    a: "An AHC must be issued no more than 10 days before you enter the EU. I recommend booking 2–4 weeks ahead, and making sure your pet's rabies vaccination is at least 21 days old before the home visit.",
   },
   {
     q: "My pet has an EU pet passport issued abroad — do I still need an AHC?",
@@ -124,11 +124,11 @@ const faqs = [
   },
   {
     q: "How long does the Australia process take?",
-    a: "Plan for at least 7–8 months. The rabies antibody blood test must be done at least 180 days before export, and your pet will spend a minimum of 10 days in quarantine on arrival. We'll build the full timeline with you.",
+    a: "Plan for at least 7–8 months. The rabies antibody blood test must be done at least 180 days before export, and your pet will spend a minimum of 10 days in quarantine on arrival. I'll build the full timeline with you.",
   },
   {
     q: "Can you help if my dates change?",
-    a: "Yes — export documentation is date-sensitive, so if your travel moves, get in touch as early as possible and we'll re-issue or re-schedule whatever is affected.",
+    a: "Yes — export documentation is date-sensitive, so if your travel moves, get in touch as early as possible and I'll re-issue or re-schedule whatever is affected.",
   },
 ];
 
@@ -165,15 +165,15 @@ function Index() {
         <div className="animate-fade-up">
           <span className="inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-secondary-foreground">
             <ShieldCheck className="h-3.5 w-3.5" />
-            RCVS Official Veterinarians
+            RCVS Official Veterinarian · Home visits
           </span>
           <h1 className="mt-6 text-4xl font-medium leading-tight md:text-5xl">
-            Taking your pet abroad? We'll handle the paperwork.
+            Taking your pet abroad? I'll handle the paperwork — at your home.
           </h1>
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground">
             Animal Health Certificates for EU travel, and full export certification for
-            Australia and New Zealand — prepared by UK Official Veterinarians who know
-            every rule, deadline and stamp.
+            Australia and New Zealand — completed by an Official Veterinarian in the
+            comfort of your own home, so your pet stays calm and you skip the clinic trip.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
@@ -191,7 +191,7 @@ function Index() {
           </div>
           <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-muted-foreground">
             <span className="flex items-center gap-2">
-              <Clock3 className="h-4 w-4 text-primary" /> AHCs issued within days
+              <Clock3 className="h-4 w-4 text-primary" /> Flexible evening & weekend visits
             </span>
             <span className="flex items-center gap-2">
               <Microscope className="h-4 w-4 text-primary" /> Titre testing arranged
@@ -217,7 +217,7 @@ function Index() {
         <div className="mx-auto max-w-6xl px-6 py-20">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">Our services</p>
           <h2 className="mt-3 max-w-2xl text-3xl font-medium md:text-4xl">
-            One practice, every destination covered
+            One vet, your doorstep, every destination covered
           </h2>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             {services.map((s) => (
