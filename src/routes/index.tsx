@@ -160,8 +160,8 @@ function Index() {
           </h1>
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground">
             Animal Health Certificates for EU travel, and full export certification for
-            Australia and New Zealand — completed by an Official Veterinarian in the
-            comfort of your own home, so your pet stays calm and you skip the clinic trip.
+            Australia — completed by an Official Veterinarian in the comfort of your own
+            home, so your pet stays calm and you skip the clinic trip.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
@@ -182,10 +182,10 @@ function Index() {
               <Clock3 className="h-4 w-4 text-primary" /> Flexible evening & weekend visits
             </span>
             <span className="flex items-center gap-2">
-              <Microscope className="h-4 w-4 text-primary" /> Titre testing arranged
+              <Microscope className="h-4 w-4 text-primary" /> RNATT result certification
             </span>
             <span className="flex items-center gap-2">
-              <Globe2 className="h-4 w-4 text-primary" /> EU · AU · NZ specialists
+              <Globe2 className="h-4 w-4 text-primary" /> EU & Australia specialists
             </span>
           </div>
         </div>
