@@ -209,7 +209,7 @@ function Index() {
         <div className="mx-auto max-w-6xl px-6 py-20">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">What I do</p>
           <h2 className="mt-3 max-w-2xl text-3xl font-medium md:text-4xl">
-            One vet, your doorstep, every destination covered
+            One vet, your doorstep, every document covered
           </h2>
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             {services.map((s) => (
@@ -232,6 +232,18 @@ function Index() {
                 </ul>
               </article>
             ))}
+          </div>
+          <div className="mt-10 flex flex-col items-start gap-3 rounded-2xl border border-dashed border-border bg-card/60 px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-muted-foreground">
+              <span className="font-semibold text-foreground">Travelling elsewhere?</span>{" "}
+              Requirements vary by destination — get in touch and we'll see how we can help.
+            </p>
+            <a
+              href="#contact"
+              className="shrink-0 rounded-full border border-border bg-background px-5 py-2 text-sm font-semibold transition-colors hover:bg-secondary"
+            >
+              Ask about your destination
+            </a>
           </div>
         </div>
       </section>
