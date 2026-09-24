@@ -23,14 +23,14 @@ export const Route = createFileRoute("/")({
       { title: "PetPass Export — Pet Travel Documents for the EU, Australia & New Zealand" },
       {
         name: "description",
-        content:
-          "UK-based Official Veterinarians issuing Animal Health Certificates (AHCs) for EU travel and full export certification for Australia and New Zealand. Stress-free pet travel paperwork, done right.",
+      content:
+          "A UK Official Veterinarian providing home visits for Animal Health Certificates (AHCs) for EU travel and export certification for Australia and New Zealand. Stress-free pet travel paperwork, completed at your home.",
       },
       { property: "og:title", content: "PetPass Export — Pet Travel Documents for the EU, Australia & New Zealand" },
       {
         property: "og:description",
         content:
-          "Animal Health Certificates for EU travel and export certification for Australia & New Zealand, issued by UK Official Veterinarians.",
+          "Animal Health Certificates for EU travel and export certification for Australia & New Zealand, completed at your home by a UK Official Veterinarian.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -52,19 +52,19 @@ const services = [
     icon: FileCheck2,
     title: "Animal Health Certificates (EU)",
     description:
-      "Since Brexit, UK pet passports are no longer valid for EU travel. We issue Animal Health Certificates valid for entry to the EU and Northern Ireland — covering up to 5 pets, onward travel for 4 months, and re-entry to Great Britain.",
+      "Since Brexit, UK pet passports are no longer valid for EU travel. I issue Animal Health Certificates at your home — valid for entry to the EU and Northern Ireland, covering up to 5 pets, onward travel for 4 months, and re-entry to Great Britain.",
     points: [
       "Valid for 10 days for EU entry from date of issue",
       "Microchip & rabies vaccination checks included",
       "Tapeworm treatment guidance for return journeys",
-      "Issued by an RCVS-registered Official Veterinarian",
+      "Completed at your home — no stressful clinic trip",
     ],
   },
   {
     icon: Plane,
     title: "Australia Export Certification",
     description:
-      "Australia has some of the strictest biosecurity rules in the world. We manage the full Export Health Certificate process — from rabies titre testing timelines to the mandatory quarantine booking paperwork.",
+      "Australia has some of the strictest biosecurity rules in the world. I manage the full Export Health Certificate process — from rabies titre testing timelines to the mandatory quarantine booking paperwork — with examinations and sampling done at your home.",
     points: [
       "Export Health Certificate (EHC) via APHA",
       "Rabies antibody (RNATT) blood test coordination",
@@ -76,7 +76,7 @@ const services = [
     icon: Globe2,
     title: "New Zealand Export Certification",
     description:
-      "Moving to New Zealand requires an import permit, MPI-approved quarantine arrangements, and a precise schedule of treatments and tests. We handle the veterinary side end to end.",
+      "Moving to New Zealand requires an import permit, MPI-approved quarantine arrangements, and a precise schedule of treatments and tests. I handle the veterinary side end to end, visiting you at home for each step.",
     points: [
       "MPI import permit support & document checks",
       "Pre-export treatments and laboratory testing",
