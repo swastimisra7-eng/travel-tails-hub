@@ -1,7 +1,7 @@
 # Roadmap
 
-- [x] Build landing page for UK pet export documentation (AHC for EU, AU/NZ export)
-- [x] Reframe copy around OV home-visit service — certification completed at the owner's home
-- [x] Remove New Zealand — EU and Australia only
-- [x] Australia RNATT: no blood draws by this OV; certify lab results after another OV completes the draw
-- [x] Add "travelling elsewhere? get in touch" note
+- [x] Landing page: EU AHCs + Australia export, home-visit OV, first-person copy
+- [x] Remove New Zealand; RNATT = certify results only, no blood draws
+- [x] Update FAQs per new EU rules (22 Apr 2026)
+- [x] Australia export timeline infographic for pet owners (per APHA ET258 Rev. 08/25) — /australia-timeline, linked from homepage Australia card
+- [ ] Replace placeholder contact details (hello@petpassexport.co.uk, 020 7123 4567) with real ones — awaiting user

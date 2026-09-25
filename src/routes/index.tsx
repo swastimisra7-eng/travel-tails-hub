@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   PawPrint,
   FileCheck2,
@@ -242,6 +242,14 @@ function Index() {
                     </li>
                   ))}
                 </ul>
+                {s.title.includes("Australia") && (
+                  <Link
+                    to="/australia-timeline"
+                    className="mt-6 inline-flex items-center gap-2 self-start rounded-full border border-border bg-background px-5 py-2 text-sm font-semibold transition-colors hover:bg-secondary"
+                  >
+                    See the step-by-step timeline
+                  </Link>
+                )}
               </article>
             ))}
           </div>
