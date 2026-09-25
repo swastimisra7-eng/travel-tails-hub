@@ -57,6 +57,7 @@ const services = [
       "Valid for 10 days for EU entry from date of issue",
       "Up to 6 months onward travel in the EU & re-entry to GB",
       "Microchip & rabies vaccination checks included",
+      "Free return-to-GB checklist with every appointment",
       "Completed at your home — no stressful clinic trip",
     ],
   },
@@ -109,6 +110,18 @@ const faqs = [
   {
     q: "My pet has an EU pet passport — can I still use it?",
     a: "Under the EU rules that took effect on 22 April 2026, EU pet passports should no longer be used by people whose main home is in Great Britain — even passports issued before that date may no longer be accepted for EU entry. An Animal Health Certificate is now the recommended document. You can still use an EU pet passport for your return journey to Great Britain.",
+  },
+  {
+    q: "The rabies vaccination in my pet's EU passport has expired — what now?",
+    a: "UK vets can't enter rabies vaccinations into an EU-issued passport — only the tapeworm and clinical examination sections may be completed here. If the rabies vaccination recorded in an EU passport has expired while your pet has been in Great Britain, you'll need a new Animal Health Certificate instead. Book a home visit and I'll sort it.",
+  },
+  {
+    q: "Does my pet need a microchip?",
+    a: "Yes — your pet must be microchipped (or have a legible tattoo applied before 3 July 2011) before the rabies vaccination is given. I scan and verify the microchip at every visit, and for Australia exports the chip must be registered on a Defra-approved UK database with your correct details.",
+  },
+  {
+    q: "Can my puppy or kitten travel?",
+    a: "Puppies and kittens under eight weeks old can't travel unless they're accompanied by their mother. On top of that, the rabies vaccination can only be given from 12 weeks of age, followed by a 21-day wait before EU travel — so in practice, plan on your pet being at least 15 weeks old before their first trip.",
   },
   {
     q: "How long is an Animal Health Certificate valid for?",
