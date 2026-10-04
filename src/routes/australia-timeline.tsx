@@ -20,7 +20,7 @@ import {
 export const Route = createFileRoute("/australia-timeline")({
   head: () => ({
     meta: [
-      { title: "Australia Pet Export Timeline — What Happens When | PetPass Export" },
+      { title: "Australia Pet Export Timeline — What Happens When | Pet Permit" },
       {
         name: "description",
         content:
@@ -143,7 +143,7 @@ function AustraliaTimeline() {
               <PawPrint className="h-5 w-5" />
             </span>
             <span className="font-semibold tracking-tight" style={{ fontFamily: "Fraunces, serif" }}>
-              PetPass Export
+              Pet Permit
             </span>
           </Link>
           <Link
@@ -246,16 +246,16 @@ function AustraliaTimeline() {
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <a
-              href="mailto:hello@petpassexport.co.uk"
+              href="mailto:swasti@petpermit.co.uk"
               className="inline-flex items-center gap-2 rounded-full bg-background px-7 py-3 font-semibold text-foreground transition-opacity hover:opacity-90"
             >
-              <Mail className="h-4 w-4" /> hello@petpassexport.co.uk
+              <Mail className="h-4 w-4" /> swasti@petpermit.co.uk
             </a>
             <a
-              href="tel:+442071234567"
+              href="tel:+447778204575"
               className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 px-7 py-3 font-semibold transition-colors hover:bg-primary-foreground/10"
             >
-              <Phone className="h-4 w-4" /> 020 7123 4567
+              <Phone className="h-4 w-4" /> 07778 204575
             </a>
           </div>
         </div>
@@ -265,7 +265,7 @@ function AustraliaTimeline() {
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-muted-foreground md:flex-row">
           <span className="flex items-center gap-2">
-            <PawPrint className="h-4 w-4" /> PetPass Export — UK pet travel documentation
+            <PawPrint className="h-4 w-4" /> Pet Permit — UK pet travel documentation
           </span>
           <span>
             Certification by RCVS-registered Official Veterinarians · APHA-recognised processes
