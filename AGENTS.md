@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Hosting: Netlify builds use the root netlify.toml Nitro preset; Lovable preview configuration remains unchanged.
+- bun.lock must only reference https://registry.npmjs.org/ tarball URLs (never the internal sandbox npm cache), because the site is built on Netlify from GitHub.
