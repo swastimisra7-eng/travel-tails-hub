@@ -1,0 +1,154 @@
+import { useState, type FormEvent } from "react";
+import { Mail } from "lucide-react";
+
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const TIMES = ["AM", "PM"];
+
+const inputCls =
+  "mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/30";
+const labelCls = "block text-sm font-semibold text-foreground";
+
+export function EnquiryForm() {
+  const [slots, setSlots] = useState<string[]>([]);
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [error, setError] = useState<string | null>(null);
+
+  const ordered = DAYS.flatMap((d) => TIMES.map((t) => `${d} ${t}`)).filter((s) => slots.includes(s));
+  const availability = ordered.join(", ");
+
+  const toggle = (slot: string) =>
+    setSlots((prev) => (prev.includes(slot) ? prev.filter((s) => s !== slot) : [...prev, slot]));
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (slots.length === 0) {
+      setError("Please choose at least one availability slot.");
+      return;
+    }
+    setError(null);
+    setStatus("sending");
+    const fd = new FormData(e.currentTarget);
+    fd.set("form-name", "enquiry");
+    fd.set("availability", availability);
+    const body = new URLSearchParams();
+    fd.forEach((v, k) => body.append(k, String(v)));
+    try {
+      const res = await fetch("/__forms.html", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: body.toString(),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setStatus("success");
+    } catch {
+      setStatus("error");
+      setError("Sorry, something went wrong sending your enquiry. Please try again or email me directly.");
+    }
+  }
+
+  if (status === "success") {
+    return (
+      <div className="rounded-2xl bg-card p-10 text-center text-foreground">
+        <p className="text-xl font-semibold">Thanks — I'll be in touch within one working day.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form
+      name="enquiry"
+      method="POST"
+      data-netlify="true"
+      netlify-honeypot="bot-field"
+      onSubmit={onSubmit}
+      className="rounded-2xl bg-card p-6 text-left text-foreground md:p-8"
+    >
+      <input type="hidden" name="form-name" value="enquiry" />
+      <p className="hidden">
+        <label>
+          Don't fill this out: <input name="bot-field" tabIndex={-1} autoComplete="off" />
+        </label>
+      </p>
+      <input type="hidden" name="availability" value={availability} />
+
+      <div className="grid gap-5 md:grid-cols-2">
+        <label className={labelCls}>
+          Your name
+          <input name="name" required className={inputCls} autoComplete="name" />
+        </label>
+        <label className={labelCls}>
+          Email address
+          <input name="email" type="email" required className={inputCls} autoComplete="email" />
+        </label>
+        <label className={labelCls}>
+          Postcode
+          <input name="postcode" required maxLength={10} className={`${inputCls} uppercase`} autoComplete="postal-code" />
+        </label>
+        <label className={labelCls}>
+          Where are you travelling?
+          <input name="destination" required placeholder="e.g. France, Spain, Australia" className={inputCls} />
+        </label>
+        <label className={labelCls}>
+          Travel date (approx.)
+          <input name="travel_date" type="date" required className={inputCls} />
+        </label>
+        <label className={labelCls}>
+          Your pet(s)
+          <input name="pets" required placeholder="e.g. Dog – Labrador, 4 yrs" className={inputCls} />
+        </label>
+      </div>
+
+      <fieldset className="mt-6">
+        <legend className={labelCls}>Preferred availability for the home visit</legend>
+        <div className="mt-3 grid max-w-sm grid-cols-[3rem_1fr_1fr] gap-2 text-sm">
+          <span />
+          {TIMES.map((t) => (
+            <span key={t} className="text-center text-xs font-semibold text-muted-foreground">{t}</span>
+          ))}
+          {DAYS.map((d) => (
+            <div key={d} className="contents">
+              <span className="self-center font-medium">{d}</span>
+              {TIMES.map((t) => {
+                const slot = `${d} ${t}`;
+                const on = slots.includes(slot);
+                return (
+                  <label
+                    key={slot}
+                    className={`flex cursor-pointer items-center justify-center rounded-lg border py-2 text-xs font-semibold transition-colors ${
+                      on ? "border-primary bg-primary text-primary-foreground" : "border-input bg-background hover:bg-secondary"
+                    }`}
+                  >
+                    <input type="checkbox" className="sr-only" checked={on} onChange={() => toggle(slot)} aria-label={slot} />
+                    {t}
+                  </label>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </fieldset>
+
+      <label className={`${labelCls} mt-6`}>
+        Anything else? <span className="font-normal text-muted-foreground">(optional)</span>
+        <textarea name="message" rows={4} className={inputCls} />
+      </label>
+
+      {error && <p className="mt-4 text-sm font-medium text-destructive" role="alert">{error}</p>}
+
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="mt-6 w-full rounded-full bg-primary px-7 py-3 font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-60 md:w-auto"
+      >
+        {status === "sending" ? "Sending…" : "Send enquiry"}
+      </button>
+
+      <p className="mt-5 text-sm text-muted-foreground">
+        Prefer email?{" "}
+        <a href="mailto:swasti@petpermit.co.uk" className="inline-flex items-center gap-1 font-semibold text-primary underline-offset-4 hover:underline">
+          <Mail className="h-3.5 w-3.5" /> swasti@petpermit.co.uk
+        </a>
+      </p>
+    </form>
+  );
+}

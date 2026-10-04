@@ -10,12 +10,12 @@ import {
   ShieldCheck,
   Clock3,
   Globe2,
-  Phone,
   Mail,
   CheckCircle2,
 } from "lucide-react";
 import heroPets from "@/assets/hero-pets.jpg";
 import travelDog from "@/assets/travel-dog.jpg";
+import { EnquiryForm } from "@/components/EnquiryForm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -77,10 +77,10 @@ const services = [
 
 const steps = [
   {
-    icon: Phone,
+    icon: Mail,
     title: "Tell us your plans",
     description:
-      "Share your destination, travel dates, and your pet's details. I map out every deadline backwards from your departure day.",
+      "Send me a quick enquiry with your destination, travel dates, and your pet's details. I map out every deadline backwards from your departure day.",
   },
   {
     icon: Syringe,
@@ -350,22 +350,11 @@ function Index() {
             Tell me where you're headed — I'll come to you
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-primary-foreground/85">
-            Every journey starts with a short phone consultation. Share your destination and dates,
-            and I'll send back a personalised document plan and home-visit schedule within one working day.
+            Tell me a little about your trip and when you're free, and I'll get back to you within
+            one working day with a personalised document plan.
           </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="mailto:swasti@petpermit.co.uk"
-              className="inline-flex items-center gap-2 rounded-full bg-background px-7 py-3 font-semibold text-foreground transition-opacity hover:opacity-90"
-            >
-              <Mail className="h-4 w-4" /> swasti@petpermit.co.uk
-            </a>
-            <a
-              href="tel:+447778204575"
-              className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 px-7 py-3 font-semibold transition-colors hover:bg-primary-foreground/10"
-            >
-              <Phone className="h-4 w-4" /> 07778 204575
-            </a>
+          <div className="mx-auto mt-8 max-w-3xl">
+            <EnquiryForm />
           </div>
         </div>
       </section>
