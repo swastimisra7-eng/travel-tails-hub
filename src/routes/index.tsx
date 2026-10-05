@@ -13,7 +13,6 @@ import {
   Globe2,
   Mail,
   CheckCircle2,
-  UserRound,
   Stethoscope,
   Menu,
   X,
@@ -23,6 +22,7 @@ import {
 } from "lucide-react";
 import heroPets from "@/assets/hero-pets.jpg";
 import travelDog from "@/assets/travel-dog.jpg";
+import swastiPhoto from "@/assets/swasti-misra.jpg";
 import { EnquiryForm } from "@/components/EnquiryForm";
 
 export const Route = createFileRoute("/")({
@@ -428,11 +428,14 @@ function Index() {
       <section id="about" className="scroll-mt-16 bg-secondary/50">
         <div className="mx-auto max-w-6xl px-6 py-20">
           <div className="grid items-center gap-12 md:grid-cols-[2fr_3fr]">
-            {/* TODO: replace with a real photo, e.g. <img src={vetPhoto} ... /> */}
-            <div className="flex aspect-[4/5] w-full flex-col items-center justify-center gap-3 rounded-3xl border border-dashed border-border bg-card text-muted-foreground">
-              <UserRound className="h-14 w-14" />
-              <span className="text-sm font-medium">Photo coming soon</span>
-            </div>
+            <img
+              src={swastiPhoto}
+              alt="Dr Swasti Misra, the vet behind Pet Permit"
+              width={800}
+              height={800}
+              loading="lazy"
+              className="aspect-[4/5] w-full rounded-3xl border border-border object-cover shadow-lg"
+            />
             <div>
               <p className="text-sm font-semibold uppercase tracking-widest text-primary">
                 About me
