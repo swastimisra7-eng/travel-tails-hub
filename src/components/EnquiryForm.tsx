@@ -151,7 +151,10 @@ export function EnquiryForm() {
       </div>
 
       <fieldset className="mt-6">
-        <legend className={labelCls}>Preferred availability for the home visit</legend>
+        <legend className={labelCls}>
+          Preferred availability for the home visit{" "}
+          <span className="font-normal text-muted-foreground">(select as many as you like)</span>
+        </legend>
         <div className="mt-3 grid max-w-sm grid-cols-[3rem_1fr_1fr] gap-2 text-sm">
           <span />
           {TIMES.map((t) => (
