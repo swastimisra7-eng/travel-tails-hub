@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { SiteFooter } from "@/components/SiteFooter";
 import {
   PawPrint,
   FileCheck2,
@@ -18,7 +19,6 @@ import {
   X,
   HeartHandshake,
   Home,
-  Linkedin,
 } from "lucide-react";
 import heroPets from "@/assets/hero-pets.jpg";
 import travelDog from "@/assets/travel-dog.jpg";
@@ -520,32 +520,7 @@ function Index() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-8 text-sm text-muted-foreground md:flex-row">
-          <span className="flex items-center gap-2">
-            <PawPrint className="h-4 w-4" /> Pet Permit — UK pet travel documentation
-          </span>
-          <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:gap-4">
-            <span>RCVS-registered · APHA-recognised processes</span>
-            <a
-              href="https://www.rcvs.org.uk/animal-owners/find-a-vet/people/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 whitespace-nowrap font-medium transition-colors hover:text-foreground"
-            >
-              <ShieldCheck className="h-4 w-4" /> RCVS Find a Vet
-            </a>
-            <a
-              href="https://www.linkedin.com/in/misraswasti/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 whitespace-nowrap font-medium transition-colors hover:text-foreground"
-            >
-              <Linkedin className="h-4 w-4" /> LinkedIn
-            </a>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
 
       {/* Mobile & tablet: sticky booking bar */}
       <div
