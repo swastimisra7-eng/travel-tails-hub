@@ -15,6 +15,7 @@ import {
   CheckCircle2,
   Mail,
   Phone,
+  Linkedin,
 } from "lucide-react";
 
 export const Route = createFileRoute("/australia-timeline")({
@@ -268,7 +269,17 @@ function AustraliaTimeline() {
           <span className="flex items-center gap-2">
             <PawPrint className="h-4 w-4" /> Pet Permit — UK pet travel documentation
           </span>
-          <span>RCVS-registered · APHA-recognised processes</span>
+          <div className="flex items-center gap-4">
+            <span>RCVS-registered · APHA-recognised processes</span>
+            <a
+              href="https://www.linkedin.com/in/misraswasti/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-medium transition-colors hover:text-foreground"
+            >
+              <Linkedin className="h-4 w-4" /> LinkedIn
+            </a>
+          </div>
         </div>
       </footer>
     </div>

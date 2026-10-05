@@ -19,6 +19,7 @@ import {
   X,
   HeartHandshake,
   Home,
+  Linkedin,
 } from "lucide-react";
 import heroPets from "@/assets/hero-pets.jpg";
 import travelDog from "@/assets/travel-dog.jpg";
@@ -71,7 +72,7 @@ const services = [
     icon: Plane,
     title: "Australia Export Certification",
     description:
-      "Australia has some of the strictest biosecurity rules in the world. I will guide you through the full Export Health Certificate process — from rabies titre testing timelines to the mandatory quarantine booking paperwork — with examinations done at your home.",
+      "Australia has some of the strictest biosecurity rules in the world. I'll guide you through the Export Health Certificate process, with examinations done at your home.",
     points: [
       "ID check and ID declaration",
       "RNATT: I certify the laboratory results once the blood draw has been completed by another OV",
@@ -97,7 +98,7 @@ const steps = [
     icon: Mail,
     title: "Tell us your plans",
     description:
-      "Send me a quick enquiry with your destination, travel dates, and your pet's details. I map out every deadline backwards from your departure day.",
+      "Send me a quick enquiry with your destination, travel dates, and your pet's details. I'll explain the key deadlines and support you at each stage wherever I can.",
   },
   {
     icon: Syringe,
@@ -134,8 +135,22 @@ const faqs: { id?: string; q: string; a: string }[] = [
     ].join("\n"),
   },
   {
-    q: "What does my pet need?",
-    a: "Your pet must be microchipped and have a valid rabies vaccination.",
+    q: "Which areas do you cover?",
+    a: [
+      "I regularly cover East London, South East London and parts of North London.",
+      "I can often travel further for homes with good public transport links. Send an enquiry with your postcode and I'll confirm whether I can come to you.",
+    ].join("\n\n"),
+  },
+  {
+    q: "What should I have ready for the visit?",
+    a: [
+      "A home visit usually takes 30–45 minutes. Your pet must be microchipped and have a valid rabies vaccination. On the day, please have ready:",
+      "• Your pet's original vaccination record",
+      "• Your pet's microchip details",
+      "• Your travel dates and destination",
+      "• An adult (18 or over) at home for the whole visit",
+      "• Your pet indoors and safely restrained",
+    ].join("\n"),
   },
   {
     q: "How far in advance should I book an AHC appointment?",
@@ -146,12 +161,8 @@ const faqs: { id?: string; q: string; a: string }[] = [
     a: "UK vets can't enter rabies vaccinations into an EU-issued passport — only the tapeworm and clinical examination sections may be completed here. If the rabies vaccination recorded in an EU passport has expired while your pet has been in Great Britain, you'll need a new Animal Health Certificate instead. Book a home visit and I'll sort it.",
   },
   {
-    q: "How long is an Animal Health Certificate valid for?",
-    a: "You still need a new AHC for each trip from Great Britain to the EU, and it must be issued within 10 days of arrival. But once you're in the EU, it now covers onward travel for up to six months and re-entry to Great Britain — as long as your pet's rabies vaccination stays valid.",
-  },
-  {
     q: "How long does the Australia process take?",
-    a: "Plan for at least 7–8 months. The rabies antibody blood test must be done at least 180 days before export, and your pet will spend a minimum of 10 days in quarantine on arrival. I'll build the full timeline with you.",
+    a: "Plan for at least 7–8 months. The rabies antibody blood test must be done at least 180 days before export, and your pet will spend a minimum of 10 days in quarantine on arrival. I'll support you at each stage of the timeline wherever I can.",
   },
 ];
 
@@ -272,7 +283,7 @@ function Index() {
             Taking your pet abroad? I'll handle the paperwork at your home.
           </h1>
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground">
-            Animal Health Certificates for EU travel, and full export certification for Australia —
+            Animal Health Certificates for EU travel, and export certification for Australia —
             completed by an Official Veterinarian in the comfort of your own home, so your pet stays
             calm and you skip the clinic trip.
           </p>
@@ -510,7 +521,17 @@ function Index() {
           <span className="flex items-center gap-2">
             <PawPrint className="h-4 w-4" /> Pet Permit — UK pet travel documentation
           </span>
-          <span>RCVS-registered · APHA-recognised processes</span>
+          <div className="flex items-center gap-4">
+            <span>RCVS-registered · APHA-recognised processes</span>
+            <a
+              href="https://www.linkedin.com/in/misraswasti/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-medium transition-colors hover:text-foreground"
+            >
+              <Linkedin className="h-4 w-4" /> LinkedIn
+            </a>
+          </div>
         </div>
       </footer>
 
