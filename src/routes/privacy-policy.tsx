@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowLeft, PawPrint } from "lucide-react";
-import { SiteFooter } from "@/components/SiteFooter";
+import { SiteLayout } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/privacy-policy")({
   head: () => ({
@@ -145,30 +144,7 @@ function Table({
 
 function PrivacyPolicy() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
-              <PawPrint className="h-5 w-5" />
-            </span>
-            <span
-              className="font-semibold tracking-tight"
-              style={{ fontFamily: "Fraunces, serif" }}
-            >
-              Pet Permit
-            </span>
-          </Link>
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2 text-sm font-semibold transition-colors hover:bg-secondary"
-          >
-            <ArrowLeft className="h-4 w-4" /> Back to home
-          </Link>
-        </div>
-      </header>
-
+    <SiteLayout>
       <main className="mx-auto max-w-3xl px-6 py-16 md:py-20">
         <h1 className="text-4xl font-medium md:text-5xl">Privacy Policy</h1>
         <p className="mt-3 text-sm text-muted-foreground">Last updated: {LAST_UPDATED}</p>
@@ -339,8 +315,6 @@ function PrivacyPolicy() {
           </p>
         </Section>
       </main>
-
-      <SiteFooter />
-    </div>
+    </SiteLayout>
   );
 }

@@ -1,8 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteFooter } from "@/components/SiteFooter";
+import { SiteLayout } from "@/components/SiteLayout";
 import {
-  PawPrint,
-  ArrowLeft,
   Microchip,
   Syringe,
   ScanLine,
@@ -134,30 +132,7 @@ const milestones: Milestone[] = [
 
 function AustraliaTimeline() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
-              <PawPrint className="h-5 w-5" />
-            </span>
-            <span
-              className="font-semibold tracking-tight"
-              style={{ fontFamily: "Fraunces, serif" }}
-            >
-              Pet Permit
-            </span>
-          </Link>
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-5 py-2 text-sm font-semibold transition-colors hover:bg-secondary"
-          >
-            <ArrowLeft className="h-4 w-4" /> Back to home
-          </Link>
-        </div>
-      </header>
-
+    <SiteLayout>
       {/* Hero */}
       <section className="mx-auto max-w-4xl px-6 pb-4 pt-16 text-center md:pt-24">
         <span className="inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-secondary-foreground">
@@ -255,9 +230,6 @@ function AustraliaTimeline() {
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <SiteFooter />
-    </div>
+    </SiteLayout>
   );
 }
