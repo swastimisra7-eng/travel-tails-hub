@@ -150,6 +150,7 @@ const faqs: { id?: string; q: string; a: string }[] = [
       "• Your travel dates and destination",
       "• An adult (18 or over) at home for the whole visit",
       "• Your pet indoors and safely restrained",
+      "• Pre-entry tapeworm treatment (subject to travel destination)",
     ].join("\n"),
   },
   {
@@ -277,7 +278,7 @@ function Index() {
         <div className="animate-fade-up">
           <span className="inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-secondary-foreground">
             <ShieldCheck className="h-3.5 w-3.5" />
-            APHA Authorised and RCVS Registered · Home visits
+            APHA Authorised and RCVS Registered · Home visits across London
           </span>
           <h1 className="mt-6 text-4xl font-medium leading-tight md:text-5xl">
             Taking your pet abroad? I'll handle the paperwork at your home.
@@ -521,13 +522,21 @@ function Index() {
           <span className="flex items-center gap-2">
             <PawPrint className="h-4 w-4" /> Pet Permit — UK pet travel documentation
           </span>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:gap-4">
             <span>RCVS-registered · APHA-recognised processes</span>
+            <a
+              href="https://www.rcvs.org.uk/animal-owners/find-a-vet/people/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 whitespace-nowrap font-medium transition-colors hover:text-foreground"
+            >
+              <ShieldCheck className="h-4 w-4" /> RCVS Find a Vet
+            </a>
             <a
               href="https://www.linkedin.com/in/misraswasti/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-medium transition-colors hover:text-foreground"
+              className="inline-flex items-center gap-1.5 whitespace-nowrap font-medium transition-colors hover:text-foreground"
             >
               <Linkedin className="h-4 w-4" /> LinkedIn
             </a>

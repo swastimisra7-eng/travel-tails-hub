@@ -14,7 +14,6 @@ import {
   AlertTriangle,
   CheckCircle2,
   Mail,
-  Phone,
   Linkedin,
 } from "lucide-react";
 
@@ -253,12 +252,6 @@ function AustraliaTimeline() {
             >
               <Mail className="h-4 w-4" /> swasti@petpermit.co.uk
             </a>
-            <a
-              href="tel:+447778204575"
-              className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 px-7 py-3 font-semibold transition-colors hover:bg-primary-foreground/10"
-            >
-              <Phone className="h-4 w-4" /> 07778 204575
-            </a>
           </div>
         </div>
       </section>
@@ -269,13 +262,21 @@ function AustraliaTimeline() {
           <span className="flex items-center gap-2">
             <PawPrint className="h-4 w-4" /> Pet Permit — UK pet travel documentation
           </span>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:gap-4">
             <span>RCVS-registered · APHA-recognised processes</span>
+            <a
+              href="https://www.rcvs.org.uk/animal-owners/find-a-vet/people/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 whitespace-nowrap font-medium transition-colors hover:text-foreground"
+            >
+              <ShieldCheck className="h-4 w-4" /> RCVS Find a Vet
+            </a>
             <a
               href="https://www.linkedin.com/in/misraswasti/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-medium transition-colors hover:text-foreground"
+              className="inline-flex items-center gap-1.5 whitespace-nowrap font-medium transition-colors hover:text-foreground"
             >
               <Linkedin className="h-4 w-4" /> LinkedIn
             </a>
