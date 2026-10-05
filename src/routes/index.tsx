@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   PawPrint,
@@ -12,6 +13,12 @@ import {
   Globe2,
   Mail,
   CheckCircle2,
+  UserRound,
+  Stethoscope,
+  Menu,
+  X,
+  HeartHandshake,
+  Home,
 } from "lucide-react";
 import heroPets from "@/assets/hero-pets.jpg";
 import travelDog from "@/assets/travel-dog.jpg";
@@ -23,7 +30,7 @@ export const Route = createFileRoute("/")({
       { title: "Pet Permit — Pet Travel Documents for the EU & Australia" },
       {
         name: "description",
-      content:
+        content:
           "A UK Official Veterinarian providing home visits for Animal Health Certificates (AHCs) for EU travel and export certification for Australia. Stress-free pet travel paperwork, completed at your home.",
       },
       { property: "og:title", content: "Pet Permit — Pet Travel Documents for the EU & Australia" },
@@ -57,7 +64,6 @@ const services = [
       "Valid for 10 days for EU entry from date of issue",
       "Up to 6 months onward travel in the EU & re-entry to GB",
       "Microchip & rabies vaccination checks included",
-      "Free return-to-GB checklist with every appointment",
       "Completed at your home — no stressful clinic trip",
     ],
   },
@@ -65,12 +71,23 @@ const services = [
     icon: Plane,
     title: "Australia Export Certification",
     description:
-      "Australia has some of the strictest biosecurity rules in the world. I manage the full Export Health Certificate process — from rabies titre testing timelines to the mandatory quarantine booking paperwork — with examinations done at your home.",
+      "Australia has some of the strictest biosecurity rules in the world. I will guide you through the full Export Health Certificate process — from rabies titre testing timelines to the mandatory quarantine booking paperwork — with examinations done at your home.",
     points: [
-      "Export Health Certificate (EHC) via APHA",
+      "ID check and ID declaration",
       "RNATT: I certify the laboratory results once the blood draw has been completed by another OV",
-      "180-day timeline planning from blood draw",
       "Liaison with your chosen pet transport agent",
+      "Export Health Certificate (EHC) via APHA",
+    ],
+  },
+  {
+    icon: Stethoscope,
+    title: "Fit-to-Fly Certificates",
+    description:
+      "Some airlines and destinations ask for a vet's confirmation that your pet is healthy enough to travel. I'll examine your pet at home and issue a fit-to-fly certificate to travel alongside your other documents.",
+    points: [
+      "Full health examination at your home",
+      "Signed certificate issued at the visit",
+      "Can be combined with an AHC or export visit",
     ],
   },
 ];
@@ -102,79 +119,146 @@ const steps = [
   },
 ];
 
-const faqs = [
+const faqs: { id?: string; q: string; a: string }[] = [
+  {
+    id: "pricing",
+    q: "How much does it cost?",
+    a: [
+      "AHC: £200 (repeat customers £185)",
+      "Urgent AHC, under 5 days' notice: £250",
+      "Additional pets: £50 each (up to 5 per AHC)",
+      "Fit-to-fly certificate: £100",
+      "Australia: ID checks £200 · RNATT £100 · EHC £250",
+      "Amendments: £100 per document",
+      "Other documents: price on request",
+    ].join("\n"),
+  },
+  {
+    q: "What does my pet need?",
+    a: "Your pet must be microchipped and have a valid rabies vaccination.",
+  },
   {
     q: "How far in advance should I book an AHC appointment?",
     a: "An AHC must be issued no more than 10 days before you enter the EU. I recommend booking 2–4 weeks ahead, and making sure your pet's rabies vaccination is at least 21 days old before the home visit.",
-  },
-  {
-    q: "My pet has an EU pet passport — can I still use it?",
-    a: "Under the EU rules that took effect on 22 April 2026, EU pet passports should no longer be used by people whose main home is in Great Britain — even passports issued before that date may no longer be accepted for EU entry. An Animal Health Certificate is now the recommended document. You can still use an EU pet passport for your return journey to Great Britain.",
   },
   {
     q: "The rabies vaccination in my pet's EU passport has expired — what now?",
     a: "UK vets can't enter rabies vaccinations into an EU-issued passport — only the tapeworm and clinical examination sections may be completed here. If the rabies vaccination recorded in an EU passport has expired while your pet has been in Great Britain, you'll need a new Animal Health Certificate instead. Book a home visit and I'll sort it.",
   },
   {
-    q: "Does my pet need a microchip?",
-    a: "Yes — your pet must be microchipped (or have a legible tattoo applied before 3 July 2011) before the rabies vaccination is given. I scan and verify the microchip at every visit, and for Australia exports the chip must be registered on a Defra-approved UK database with your correct details.",
-  },
-  {
-    q: "Can my puppy or kitten travel?",
-    a: "Puppies and kittens under eight weeks old can't travel unless they're accompanied by their mother. On top of that, the rabies vaccination can only be given from 12 weeks of age, followed by a 21-day wait before EU travel — so in practice, plan on your pet being at least 15 weeks old before their first trip.",
-  },
-  {
     q: "How long is an Animal Health Certificate valid for?",
     a: "You still need a new AHC for each trip from Great Britain to the EU, and it must be issued within 10 days of arrival. But once you're in the EU, it now covers onward travel for up to six months and re-entry to Great Britain — as long as your pet's rabies vaccination stays valid.",
-  },
-  {
-    q: "Can someone else travel with my pet?",
-    a: "Yes, but extra paperwork is needed. If you're not travelling with your pet, the pet must travel within five days of you, and the person accompanying them must carry your written permission alongside the pet's travel document. I can help you prepare this at the home visit.",
-  },
-  {
-    q: "How many pets can I take?",
-    a: "Non-commercial travel into the EU is now limited to five pets per private vehicle (previously five per person). The five-pet limit for travelling on foot is unchanged. Exceptions apply for pets travelling to competitions, events or training where specific conditions are met — ask me if this applies to you.",
   },
   {
     q: "How long does the Australia process take?",
     a: "Plan for at least 7–8 months. The rabies antibody blood test must be done at least 180 days before export, and your pet will spend a minimum of 10 days in quarantine on arrival. I'll build the full timeline with you.",
   },
-  {
-    q: "Do you carry out the blood draw for the Australia rabies titre test (RNATT)?",
-    a: "No — I don't perform blood draws. Once the sample has been taken by another OV and tested at the appropriate laboratory, I can certify the results and complete the rest of your export documentation.",
-  },
-  {
-    q: "Can you help if my dates change?",
-    a: "Yes — export documentation is date-sensitive, so if your travel moves, get in touch as early as possible and I'll re-issue or re-schedule whatever is affected.",
-  },
+];
+
+// Open the FAQ <details> matching an id, e.g. the pricing question from the nav link.
+function openFaq(id: string) {
+  const el = document.getElementById(id);
+  if (el instanceof HTMLDetailsElement) el.open = true;
+}
+
+const navLinks = [
+  { href: "#services", label: "Services" },
+  { href: "#process", label: "How it works" },
+  { href: "#about", label: "About me" },
+  { href: "#pricing", label: "Pricing", faq: "pricing" },
+  { href: "#faqs", label: "FAQs" },
 ];
 
 function Index() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [contactVisible, setContactVisible] = useState(false);
+
+  // Hide the mobile bottom "Book" bar while the enquiry form itself is on screen.
+  useEffect(() => {
+    const contact = document.getElementById("contact");
+    if (!contact) return;
+    const observer = new IntersectionObserver(([entry]) =>
+      setContactVisible(entry?.isIntersecting ?? false),
+    );
+    observer.observe(contact);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const onHash = () => openFaq(window.location.hash.slice(1));
+    onHash();
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background pb-20 text-foreground lg:pb-0">
       {/* Header */}
-      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/85 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-2">
+      <header
+        className={`sticky top-0 z-40 border-b border-border/60 backdrop-blur ${
+          menuOpen ? "bg-background" : "bg-background/85"
+        }`}
+      >
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-4">
+          <div className="flex shrink-0 items-center gap-2">
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
               <PawPrint className="h-5 w-5" />
             </span>
-            <span className="font-semibold tracking-tight" style={{ fontFamily: "Fraunces, serif" }}>
+            <span
+              className="whitespace-nowrap font-semibold tracking-tight"
+              style={{ fontFamily: "Fraunces, serif" }}
+            >
               Pet Permit
             </span>
           </div>
-          <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground md:flex">
-            <a href="#services" className="transition-colors hover:text-foreground">Services</a>
-            <a href="#process" className="transition-colors hover:text-foreground">How it works</a>
-            <a href="#faqs" className="transition-colors hover:text-foreground">FAQs</a>
+          <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground lg:flex">
+            {navLinks.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={l.faq ? () => openFaq(l.faq) : undefined}
+                className="transition-colors hover:text-foreground"
+              >
+                {l.label}
+              </a>
+            ))}
           </nav>
-          <a
-            href="#contact"
-            className="rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
-          >
-            Book a consultation
-          </a>
+          <div className="flex items-center gap-2">
+            <a
+              href="#contact"
+              className="whitespace-nowrap rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90 sm:px-5"
+            >
+              Book a visit
+            </a>
+            <button
+              type="button"
+              onClick={() => setMenuOpen((o) => !o)}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card transition-colors hover:bg-secondary lg:hidden"
+            >
+              {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
         </div>
+        {menuOpen && (
+          <nav id="mobile-menu" className="border-t border-border/60 px-6 pb-4 pt-2 lg:hidden">
+            {navLinks.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => {
+                  if (l.faq) openFaq(l.faq);
+                  setMenuOpen(false);
+                }}
+                className="block rounded-xl px-3 py-3 text-base font-medium transition-colors hover:bg-secondary"
+              >
+                {l.label}
+              </a>
+            ))}
+          </nav>
+        )}
       </header>
 
       {/* Hero */}
@@ -182,15 +266,15 @@ function Index() {
         <div className="animate-fade-up">
           <span className="inline-flex items-center gap-2 rounded-full bg-secondary px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-secondary-foreground">
             <ShieldCheck className="h-3.5 w-3.5" />
-            RCVS Official Veterinarian · Home visits
+            APHA Authorised and RCVS Registered · Home visits
           </span>
           <h1 className="mt-6 text-4xl font-medium leading-tight md:text-5xl">
-            Taking your pet abroad? I'll handle the paperwork — at your home.
+            Taking your pet abroad? I'll handle the paperwork at your home.
           </h1>
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground">
-            Animal Health Certificates for EU travel, and full export certification for
-            Australia — completed by an Official Veterinarian in the comfort of your own
-            home, so your pet stays calm and you skip the clinic trip.
+            Animal Health Certificates for EU travel, and full export certification for Australia —
+            completed by an Official Veterinarian in the comfort of your own home, so your pet stays
+            calm and you skip the clinic trip.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <a
@@ -236,17 +320,19 @@ function Index() {
           <h2 className="mt-3 max-w-2xl text-3xl font-medium md:text-4xl">
             One vet, your doorstep, every document covered
           </h2>
-          <div className="mt-12 grid gap-8 md:grid-cols-2">
+          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => (
               <article
                 key={s.title}
-                className="flex flex-col rounded-3xl border border-border bg-card p-8 shadow-sm transition-shadow hover:shadow-md"
+                className="flex flex-col rounded-3xl border border-border bg-card p-8 shadow-sm transition-shadow hover:shadow-md md:last:col-span-2 lg:last:col-span-1"
               >
                 <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                   <s.icon className="h-6 w-6" />
                 </span>
                 <h3 className="mt-5 text-xl font-semibold">{s.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.description}</p>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {s.description}
+                </p>
                 <ul className="mt-5 space-y-2.5">
                   {s.points.map((p) => (
                     <li key={p} className="flex items-start gap-2.5 text-sm">
@@ -282,48 +368,104 @@ function Index() {
       </section>
 
       {/* Process */}
-      <section id="process" className="mx-auto max-w-6xl px-6 py-20">
-        <div className="grid items-center gap-12 md:grid-cols-2">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-primary">How it works</p>
-            <h2 className="mt-3 text-3xl font-medium md:text-4xl">
-              A clear path from booking to boarding
-            </h2>
-            <div className="mt-10 space-y-8">
-              {steps.map((step, i) => (
-                <div key={step.title} className="flex gap-5">
-                  <div className="flex flex-col items-center">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full bg-accent text-accent-foreground">
-                      <step.icon className="h-5 w-5" />
-                    </span>
-                    {i < steps.length - 1 && <span className="mt-2 w-px flex-1 bg-border" />}
+      <section id="process">
+        <div className="mx-auto max-w-6xl px-6 py-20">
+          <div className="grid items-center gap-12 md:grid-cols-2">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-widest text-primary">
+                How it works
+              </p>
+              <h2 className="mt-3 text-3xl font-medium md:text-4xl">
+                A clear path from booking to boarding
+              </h2>
+              <div className="mt-10 space-y-8">
+                {steps.map((step, i) => (
+                  <div key={step.title} className="flex gap-5">
+                    <div className="flex flex-col items-center">
+                      <span className="flex h-11 w-11 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                        <step.icon className="h-5 w-5" />
+                      </span>
+                      {i < steps.length - 1 && <span className="mt-2 w-px flex-1 bg-border" />}
+                    </div>
+                    <div className="pb-2">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        Step {i + 1}
+                      </p>
+                      <h3 className="mt-1 text-lg font-semibold">{step.title}</h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                        {step.description}
+                      </p>
+                    </div>
                   </div>
-                  <div className="pb-2">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                      Step {i + 1}
-                    </p>
-                    <h3 className="mt-1 text-lg font-semibold">{step.title}</h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                      {step.description}
-                    </p>
+                ))}
+              </div>
+            </div>
+            <img
+              src={travelDog}
+              alt="A corgi waiting at an airport beside an IATA-approved travel crate"
+              width={1200}
+              height={912}
+              loading="lazy"
+              className="w-full rounded-3xl border border-border object-cover shadow-lg"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="about" className="scroll-mt-16 bg-secondary/50">
+        <div className="mx-auto max-w-6xl px-6 py-20">
+          <div className="grid items-center gap-12 md:grid-cols-[2fr_3fr]">
+            {/* TODO: replace with a real photo, e.g. <img src={vetPhoto} ... /> */}
+            <div className="flex aspect-[4/5] w-full flex-col items-center justify-center gap-3 rounded-3xl border border-dashed border-border bg-card text-muted-foreground">
+              <UserRound className="h-14 w-14" />
+              <span className="text-sm font-medium">Photo coming soon</span>
+            </div>
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-widest text-primary">
+                About me
+              </p>
+              <h2 className="mt-3 text-3xl font-medium md:text-4xl">
+                Hi, I'm Swasti — the vet behind Pet Permit
+              </h2>
+              <div className="mt-6 space-y-4 leading-relaxed text-muted-foreground">
+                <p>
+                  I graduated from the Royal Veterinary College, London in 2020, and have since
+                  worked in a variety of practices, from the Norfolk countryside to being lead vet
+                  at a busy 24/7 small animal hospital in London.
+                </p>
+                <p>
+                  For over half a decade, I've helped owners with their pet travel paperwork, and
+                  I've seen first-hand how overwhelming the process can be.
+                </p>
+                <p>
+                  That's why I started Pet Permit: to take the stress out of travel for your pet,
+                  and the confusion out of it for you. From your first question to the final
+                  certificate, you'll have one point of contact.
+                </p>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                {[
+                  { icon: ShieldCheck, label: "APHA Authorised. RCVS Registered." },
+                  { icon: Home, label: "Home visits only" },
+                  { icon: HeartHandshake, label: "One vet, start to finish" },
+                ].map((c) => (
+                  <div
+                    key={c.label}
+                    className="flex items-center gap-2.5 whitespace-nowrap rounded-full border border-border bg-card px-4 py-2.5 text-sm font-medium"
+                  >
+                    <c.icon className="h-5 w-5 shrink-0 text-primary" />
+                    {c.label}
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-          <img
-            src={travelDog}
-            alt="A corgi waiting at an airport beside an IATA-approved travel crate"
-            width={1200}
-            height={912}
-            loading="lazy"
-            className="w-full rounded-3xl border border-border object-cover shadow-lg"
-          />
         </div>
       </section>
 
       {/* FAQs */}
-      <section id="faqs" className="bg-secondary/50">
+      <section id="faqs">
         <div className="mx-auto max-w-4xl px-6 py-20">
           <p className="text-sm font-semibold uppercase tracking-widest text-primary">FAQs</p>
           <h2 className="mt-3 text-3xl font-medium md:text-4xl">Common questions</h2>
@@ -331,12 +473,15 @@ function Index() {
             {faqs.map((f) => (
               <details
                 key={f.q}
-                className="group rounded-2xl border border-border bg-card p-6 open:shadow-sm"
+                id={f.id}
+                className="group scroll-mt-24 rounded-2xl border border-border bg-card p-6 open:shadow-sm"
               >
                 <summary className="cursor-pointer list-none text-base font-semibold marker:hidden">
                   {f.q}
                 </summary>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{f.a}</p>
+                <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-muted-foreground">
+                  {f.a}
+                </p>
               </details>
             ))}
           </div>
@@ -344,14 +489,14 @@ function Index() {
       </section>
 
       {/* Contact CTA */}
-      <section id="contact" className="mx-auto max-w-6xl px-6 py-20">
+      <section id="contact" className="scroll-mt-24 mx-auto max-w-6xl px-6 pb-20">
         <div className="rounded-3xl bg-primary px-8 py-14 text-center text-primary-foreground md:px-16">
           <h2 className="text-3xl font-medium md:text-4xl">
             Tell me where you're headed — I'll come to you
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-primary-foreground/85">
-            Tell me a little about your trip and when you're free, and I'll get back to you within
-            one working day with a personalised document plan.
+            Tell me a little about your trip and when you're free, and I will get back to you within
+            48 hours with a personalised document plan.
           </p>
           <div className="mx-auto mt-8 max-w-3xl">
             <EnquiryForm />
@@ -365,11 +510,23 @@ function Index() {
           <span className="flex items-center gap-2">
             <PawPrint className="h-4 w-4" /> Pet Permit — UK pet travel documentation
           </span>
-          <span>
-            Certification by RCVS-registered Official Veterinarians · APHA-recognised processes
-          </span>
+          <span>RCVS-registered · APHA-recognised processes</span>
         </div>
       </footer>
+
+      {/* Mobile & tablet: sticky booking bar */}
+      <div
+        className={`fixed inset-x-0 bottom-0 z-40 border-t border-border/60 bg-background/90 px-6 py-3 backdrop-blur transition-transform lg:hidden ${
+          contactVisible ? "translate-y-full" : "translate-y-0"
+        }`}
+      >
+        <a
+          href="#contact"
+          className="block w-full rounded-full bg-primary px-5 py-3 text-center font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+        >
+          Book a visit
+        </a>
+      </div>
     </div>
   );
 }

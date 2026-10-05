@@ -142,7 +142,10 @@ function AustraliaTimeline() {
             <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
               <PawPrint className="h-5 w-5" />
             </span>
-            <span className="font-semibold tracking-tight" style={{ fontFamily: "Fraunces, serif" }}>
+            <span
+              className="font-semibold tracking-tight"
+              style={{ fontFamily: "Fraunces, serif" }}
+            >
               Pet Permit
             </span>
           </Link>
@@ -165,16 +168,16 @@ function AustraliaTimeline() {
           Your pet's journey to Australia, step by step
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-          Australia's biosecurity rules mean preparation starts many months before you fly.
-          Here's every milestone, mapped backwards from your travel date — and which ones
-          I handle for you at home.
+          Australia's biosecurity rules mean preparation starts many months before you fly. Here's
+          every milestone, mapped backwards from your travel date — and which ones I handle for you
+          at home.
         </p>
         <div className="mx-auto mt-8 flex max-w-2xl items-start gap-3 rounded-2xl border border-dashed border-border bg-card/60 px-6 py-4 text-left">
           <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
           <p className="text-sm leading-relaxed text-muted-foreground">
-            <span className="font-semibold text-foreground">The golden rule:</span> the rabies
-            blood test (RNATT) must be done between 180 and 365 days before export. Miss that
-            window and the timeline resets — so start at least 7–8 months ahead.
+            <span className="font-semibold text-foreground">The golden rule:</span> the rabies blood
+            test (RNATT) must be done between 180 and 365 days before export. Miss that window and
+            the timeline resets — so start at least 7–8 months ahead.
           </p>
         </div>
       </section>
@@ -188,9 +191,7 @@ function AustraliaTimeline() {
               <div
                 key={m.title}
                 className={`relative flex gap-6 md:w-1/2 ${
-                  i % 2 === 0
-                    ? "md:pr-12"
-                    : "md:ml-auto md:flex-row-reverse md:pl-12 md:text-right"
+                  i % 2 === 0 ? "md:pr-12" : "md:ml-auto md:flex-row-reverse md:pl-12 md:text-right"
                 }`}
               >
                 {/* Node */}
@@ -241,8 +242,8 @@ function AustraliaTimeline() {
             Tell me your travel date — I'll map out every deadline
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-primary-foreground/85">
-            I'll build a personalised timeline for your pet, coordinate with the OV66 vet
-            who takes the blood sample, and complete the certification visits at your home.
+            I'll build a personalised timeline for your pet, coordinate with the OV66 vet who takes
+            the blood sample, and complete the certification visits at your home.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <a
@@ -267,9 +268,7 @@ function AustraliaTimeline() {
           <span className="flex items-center gap-2">
             <PawPrint className="h-4 w-4" /> Pet Permit — UK pet travel documentation
           </span>
-          <span>
-            Certification by RCVS-registered Official Veterinarians · APHA-recognised processes
-          </span>
+          <span>RCVS-registered · APHA-recognised processes</span>
         </div>
       </footer>
     </div>

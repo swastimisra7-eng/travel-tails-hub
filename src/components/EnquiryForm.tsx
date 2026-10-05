@@ -1,5 +1,4 @@
 import { useState, type FormEvent } from "react";
-import { Mail } from "lucide-react";
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const TIMES = ["AM", "PM"];
@@ -13,7 +12,9 @@ export function EnquiryForm() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
 
-  const ordered = DAYS.flatMap((d) => TIMES.map((t) => `${d} ${t}`)).filter((s) => slots.includes(s));
+  const ordered = DAYS.flatMap((d) => TIMES.map((t) => `${d} ${t}`)).filter((s) =>
+    slots.includes(s),
+  );
   const availability = ordered.join(", ");
 
   const toggle = (slot: string) =>
@@ -42,14 +43,16 @@ export function EnquiryForm() {
       setStatus("success");
     } catch {
       setStatus("error");
-      setError("Sorry, something went wrong sending your enquiry. Please try again or email me directly.");
+      setError(
+        "Sorry, something went wrong sending your enquiry. Please try again or email me directly at",
+      );
     }
   }
 
   if (status === "success") {
     return (
       <div className="rounded-2xl bg-card p-10 text-center text-foreground">
-        <p className="text-xl font-semibold">Thanks — I'll be in touch within one working day.</p>
+        <p className="text-xl font-semibold">Thanks — I will be in touch within 48 hours.</p>
       </div>
     );
   }
@@ -72,6 +75,28 @@ export function EnquiryForm() {
       <input type="hidden" name="availability" value={availability} />
 
       <div className="grid gap-5 md:grid-cols-2">
+        <div className="md:col-span-2">
+          <label className={labelCls}>
+            What do you need?
+            <select name="service" required defaultValue="" className={inputCls}>
+              <option value="" disabled>
+                Select a service
+              </option>
+              <option>AHC for travel to the EU</option>
+              <option>Australia export</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label className="mt-3 flex cursor-pointer items-center gap-2.5 text-sm">
+            <input
+              type="checkbox"
+              name="fit_to_fly"
+              value="Yes"
+              className="h-4 w-4 accent-primary"
+            />
+            Select if you require a fit-to-fly certificate
+          </label>
+        </div>
         <label className={labelCls}>
           Your name
           <input name="name" required className={inputCls} autoComplete="name" />
@@ -82,11 +107,22 @@ export function EnquiryForm() {
         </label>
         <label className={labelCls}>
           Postcode
-          <input name="postcode" required maxLength={10} className={`${inputCls} uppercase`} autoComplete="postal-code" />
+          <input
+            name="postcode"
+            required
+            maxLength={10}
+            className={`${inputCls} uppercase`}
+            autoComplete="postal-code"
+          />
         </label>
         <label className={labelCls}>
           Where are you travelling?
-          <input name="destination" required placeholder="e.g. France, Spain, Australia" className={inputCls} />
+          <input
+            name="destination"
+            required
+            placeholder="e.g. France, Spain, Australia"
+            className={inputCls}
+          />
         </label>
         <label className={labelCls}>
           Travel date (approx.)
@@ -94,7 +130,12 @@ export function EnquiryForm() {
         </label>
         <label className={labelCls}>
           Your pet(s)
-          <input name="pets" required placeholder="e.g. Dog – Labrador, 4 yrs" className={inputCls} />
+          <input
+            name="pets"
+            required
+            placeholder="e.g. Dog – Labrador, 4 yrs"
+            className={inputCls}
+          />
         </label>
       </div>
 
@@ -103,7 +144,9 @@ export function EnquiryForm() {
         <div className="mt-3 grid max-w-sm grid-cols-[3rem_1fr_1fr] gap-2 text-sm">
           <span />
           {TIMES.map((t) => (
-            <span key={t} className="text-center text-xs font-semibold text-muted-foreground">{t}</span>
+            <span key={t} className="text-center text-xs font-semibold text-muted-foreground">
+              {t}
+            </span>
           ))}
           {DAYS.map((d) => (
             <div key={d} className="contents">
@@ -115,10 +158,18 @@ export function EnquiryForm() {
                   <label
                     key={slot}
                     className={`flex cursor-pointer items-center justify-center rounded-lg border py-2 text-xs font-semibold transition-colors ${
-                      on ? "border-primary bg-primary text-primary-foreground" : "border-input bg-background hover:bg-secondary"
+                      on
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-input bg-background hover:bg-secondary"
                     }`}
                   >
-                    <input type="checkbox" className="sr-only" checked={on} onChange={() => toggle(slot)} aria-label={slot} />
+                    <input
+                      type="checkbox"
+                      className="sr-only"
+                      checked={on}
+                      onChange={() => toggle(slot)}
+                      aria-label={slot}
+                    />
                     {t}
                   </label>
                 );
@@ -129,11 +180,25 @@ export function EnquiryForm() {
       </fieldset>
 
       <label className={`${labelCls} mt-6`}>
-        Anything else? <span className="font-normal text-muted-foreground">(optional)</span>
+        Anything else?{" "}
+        <span className="font-normal text-muted-foreground">(the more details, the better)</span>
         <textarea name="message" rows={4} className={inputCls} />
       </label>
 
-      {error && <p className="mt-4 text-sm font-medium text-destructive" role="alert">{error}</p>}
+      {error && (
+        <p className="mt-4 text-sm font-medium text-destructive" role="alert">
+          {error}
+          {status === "error" && (
+            <>
+              {" "}
+              <a href="mailto:swasti@petpermit.co.uk" className="underline underline-offset-2">
+                swasti@petpermit.co.uk
+              </a>
+              .
+            </>
+          )}
+        </p>
+      )}
 
       <button
         type="submit"
@@ -142,13 +207,6 @@ export function EnquiryForm() {
       >
         {status === "sending" ? "Sending…" : "Send enquiry"}
       </button>
-
-      <p className="mt-5 text-sm text-muted-foreground">
-        Prefer email?{" "}
-        <a href="mailto:swasti@petpermit.co.uk" className="inline-flex items-center gap-1 font-semibold text-primary underline-offset-4 hover:underline">
-          <Mail className="h-3.5 w-3.5" /> swasti@petpermit.co.uk
-        </a>
-      </p>
     </form>
   );
 }
