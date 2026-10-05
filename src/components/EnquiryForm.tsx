@@ -7,6 +7,16 @@ const inputCls =
   "mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/30";
 const labelCls = "block text-sm font-semibold text-foreground";
 
+// Visual marker for compulsory fields; the inputs themselves carry `required`.
+function Req() {
+  return (
+    <span className="text-destructive" aria-hidden="true">
+      {" "}
+      *
+    </span>
+  );
+}
+
 export function EnquiryForm() {
   const [slots, setSlots] = useState<string[]>([]);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -22,10 +32,6 @@ export function EnquiryForm() {
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (slots.length === 0) {
-      setError("Please choose at least one availability slot.");
-      return;
-    }
     setError(null);
     setStatus("sending");
     const fd = new FormData(e.currentTarget);
@@ -74,10 +80,15 @@ export function EnquiryForm() {
       </p>
       <input type="hidden" name="availability" value={availability} />
 
+      <p className="mb-5 text-xs text-muted-foreground">
+        <span className="text-destructive">*</span> Required
+      </p>
+
       <div className="grid gap-5 md:grid-cols-2">
         <div className="md:col-span-2">
           <label className={labelCls}>
             What do you need?
+            <Req />
             <select name="service" required defaultValue="" className={inputCls}>
               <option value="" disabled>
                 Select a service
@@ -99,14 +110,17 @@ export function EnquiryForm() {
         </div>
         <label className={labelCls}>
           Your name
+          <Req />
           <input name="name" required className={inputCls} autoComplete="name" />
         </label>
         <label className={labelCls}>
           Email address
+          <Req />
           <input name="email" type="email" required className={inputCls} autoComplete="email" />
         </label>
         <label className={labelCls}>
           Postcode
+          <Req />
           <input
             name="postcode"
             required
@@ -117,6 +131,7 @@ export function EnquiryForm() {
         </label>
         <label className={labelCls}>
           Where are you travelling?
+          <Req />
           <input
             name="destination"
             required
@@ -126,16 +141,12 @@ export function EnquiryForm() {
         </label>
         <label className={labelCls}>
           Travel date (approx.)
+          <Req />
           <input name="travel_date" type="date" required className={inputCls} />
         </label>
         <label className={labelCls}>
           Your pet(s)
-          <input
-            name="pets"
-            required
-            placeholder="e.g. Dog – Labrador, 4 yrs"
-            className={inputCls}
-          />
+          <input name="pets" placeholder="e.g. Dog – Labrador, 4 yrs" className={inputCls} />
         </label>
       </div>
 
