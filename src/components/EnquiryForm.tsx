@@ -1,7 +1,9 @@
 import { useState, type FormEvent } from "react";
+import { AvailabilityPicker } from "@/components/AvailabilityPicker";
 
-const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-const TIMES = ["AM", "PM"];
+const SPECIES = ["Dog", "Cat", "Ferret"];
+// Up to five pets can travel on one AHC.
+const MAX_PETS = 5;
 
 const inputCls =
   "mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/30";
@@ -18,17 +20,13 @@ function Req() {
 }
 
 export function EnquiryForm() {
-  const [slots, setSlots] = useState<string[]>([]);
+  const [travelDate, setTravelDate] = useState("");
+  const [availability, setAvailability] = useState("");
+  const [pets, setPets] = useState<string[]>([""]);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
 
-  const ordered = DAYS.flatMap((d) => TIMES.map((t) => `${d} ${t}`)).filter((s) =>
-    slots.includes(s),
-  );
-  const availability = ordered.join(", ");
-
-  const toggle = (slot: string) =>
-    setSlots((prev) => (prev.includes(slot) ? prev.filter((s) => s !== slot) : [...prev, slot]));
+  const petsSummary = pets.filter(Boolean).join(", ");
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -37,6 +35,7 @@ export function EnquiryForm() {
     const fd = new FormData(e.currentTarget);
     fd.set("form-name", "enquiry");
     fd.set("availability", availability);
+    fd.set("pets", petsSummary);
     const body = new URLSearchParams();
     fd.forEach((v, k) => body.append(k, String(v)));
     try {
@@ -79,6 +78,7 @@ export function EnquiryForm() {
         </label>
       </p>
       <input type="hidden" name="availability" value={availability} />
+      <input type="hidden" name="pets" value={petsSummary} />
 
       <p className="mb-5 text-xs text-muted-foreground">
         <span className="text-destructive">*</span> Required
@@ -142,55 +142,68 @@ export function EnquiryForm() {
         <label className={labelCls}>
           Travel date (approx.)
           <Req />
-          <input name="travel_date" type="date" required className={inputCls} />
+          <input
+            name="travel_date"
+            type="date"
+            required
+            value={travelDate}
+            onChange={(e) => setTravelDate(e.target.value)}
+            className={inputCls}
+          />
         </label>
-        <label className={labelCls}>
-          Your pet(s)
-          <input name="pets" placeholder="e.g. Dog – Labrador, 4 yrs" className={inputCls} />
-        </label>
+        <fieldset>
+          <legend className={labelCls}>
+            Your pet(s)
+            <Req />
+          </legend>
+          <div className="space-y-2">
+            {pets.map((species, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <select
+                  aria-label={`Pet ${i + 1}`}
+                  required
+                  value={species}
+                  onChange={(e) =>
+                    setPets((prev) => prev.map((p, j) => (j === i ? e.target.value : p)))
+                  }
+                  className={inputCls}
+                >
+                  <option value="">Select a pet</option>
+                  {SPECIES.map((sp) => (
+                    <option key={sp}>{sp}</option>
+                  ))}
+                </select>
+                {pets.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => setPets((prev) => prev.filter((_, j) => j !== i))}
+                    aria-label={`Remove pet ${i + 1}`}
+                    className="mt-1.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-input bg-background text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  >
+                    ×
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+          {pets.length < MAX_PETS && (
+            <button
+              type="button"
+              onClick={() => setPets((prev) => [...prev, ""])}
+              className="mt-3 rounded-full border border-border bg-background px-4 py-1.5 text-sm font-semibold transition-colors hover:bg-secondary"
+            >
+              + Add pet
+            </button>
+          )}
+        </fieldset>
       </div>
 
       <fieldset className="mt-6">
         <legend className={labelCls}>
           Preferred availability for the home visit{" "}
-          <span className="font-normal text-muted-foreground">(select as many as you like)</span>
+          <span className="font-normal text-muted-foreground">(add as many dates as you like)</span>
         </legend>
-        <div className="mt-3 grid max-w-sm grid-cols-[3rem_1fr_1fr] gap-2 text-sm">
-          <span />
-          {TIMES.map((t) => (
-            <span key={t} className="text-center text-xs font-semibold text-muted-foreground">
-              {t}
-            </span>
-          ))}
-          {DAYS.map((d) => (
-            <div key={d} className="contents">
-              <span className="self-center font-medium">{d}</span>
-              {TIMES.map((t) => {
-                const slot = `${d} ${t}`;
-                const on = slots.includes(slot);
-                return (
-                  <label
-                    key={slot}
-                    className={`flex cursor-pointer items-center justify-center rounded-lg border py-2 text-xs font-semibold transition-colors ${
-                      on
-                        ? "border-primary bg-primary text-primary-foreground"
-                        : "border-input bg-background hover:bg-secondary"
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      className="sr-only"
-                      checked={on}
-                      onChange={() => toggle(slot)}
-                      aria-label={slot}
-                    />
-                    {t}
-                  </label>
-                );
-              })}
-            </div>
-          ))}
-        </div>
+        <AvailabilityPicker travelDate={travelDate} onChange={setAvailability} />
       </fieldset>
 
       <label className={`${labelCls} mt-6`}>
