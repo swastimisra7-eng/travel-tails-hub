@@ -42,7 +42,7 @@ const faqs: { q: string; a: string; link?: { to: "/pricing"; label: string } }[]
   },
   {
     q: "How far in advance should I book an AHC appointment?",
-    a: "An AHC must be issued no more than 10 days before you enter the EU. I recommend booking 2–4 weeks ahead, and making sure your pet's rabies vaccination is at least 21 days old before the home visit.",
+    a: "An AHC cannot be issued more than 10 days before you enter the EU. I recommend booking your AHC appointment 2–4 weeks ahead and making this appointment usually 6–7 days prior to entry. Your pet's rabies vaccination must also have been given at least 21 days before the AHC is issued.",
   },
   {
     q: "The rabies vaccination in my pet's EU passport has expired — what now?",
