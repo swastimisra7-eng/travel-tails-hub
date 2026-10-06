@@ -39,9 +39,9 @@ function Index() {
             Taking your pet abroad? I'll handle the paperwork at your home.
           </h1>
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground">
-            Animal Health Certificates for EU travel, and export certification for Australia —
-            completed by an Official Veterinarian in the comfort of your own home, so your pet stays
-            calm and you skip the clinic trip.
+            Animal Health Certificates for EU travel, and OV66 authorised export certification for
+            Australia — completed by an Official Veterinarian in the comfort of your own home, so
+            your pet stays calm and you skip the clinic trip.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
@@ -62,10 +62,10 @@ function Index() {
               <Clock3 className="h-4 w-4 text-primary" /> Flexible evening & weekend visits
             </span>
             <span className="flex items-center gap-2">
-              <Microscope className="h-4 w-4 text-primary" /> RNATT result certification
+              <Microscope className="h-4 w-4 text-primary" /> 10-day quarantine route for Australia
             </span>
             <span className="flex items-center gap-2">
-              <Globe2 className="h-4 w-4 text-primary" /> EU & Australia specialists
+              <Globe2 className="h-4 w-4 text-primary" /> EU & Australia exports
             </span>
           </div>
         </div>

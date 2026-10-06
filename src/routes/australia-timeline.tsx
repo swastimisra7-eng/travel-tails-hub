@@ -146,7 +146,19 @@ function AustraliaTimeline() {
           every milestone, mapped backwards from your travel date — and which ones I handle for you
           at home.
         </p>
-        <div className="mx-auto mt-8 flex max-w-2xl items-start gap-3 rounded-2xl border border-dashed border-border bg-card/60 px-6 py-4 text-left">
+        <div className="mx-auto mt-8 flex max-w-2xl items-start gap-3 rounded-2xl border border-primary/30 bg-primary/10 px-6 py-4 text-left">
+          <ShieldCheck className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            <span className="font-semibold text-foreground">
+              I'm an OV66-authorised vet — the route to 10-day quarantine.
+            </span>{" "}
+            When every step is completed under the OV66 process, your pet can qualify for
+            Australia's minimum{" "}
+            <span className="whitespace-nowrap font-semibold text-foreground">10-day</span>{" "}
+            quarantine instead of <span className="font-semibold text-foreground">30 days</span>.
+          </p>
+        </div>
+        <div className="mx-auto mt-4 flex max-w-2xl items-start gap-3 rounded-2xl border border-dashed border-border bg-card/60 px-6 py-4 text-left">
           <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
           <p className="text-sm leading-relaxed text-muted-foreground">
             <span className="font-semibold text-foreground">The golden rule:</span> the rabies blood

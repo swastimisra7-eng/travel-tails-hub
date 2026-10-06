@@ -50,7 +50,7 @@ const faqs: { q: string; a: string; link?: { to: "/pricing"; label: string } }[]
   },
   {
     q: "How long does the Australia process take?",
-    a: "Plan for at least 7–8 months. The rabies antibody blood test must be done at least 180 days before export, and your pet will spend a minimum of 10 days in quarantine on arrival. I'll support you at each stage of the timeline wherever I can.",
+    a: "Plan for at least 7–8 months. The rabies antibody blood test must be done at least 180 days before export, and your pet will spend at least 10 days in quarantine on arrival — or 30 days if the preparation wasn't done under the OV66 process. I'm OV66 authorised, so I can help your pet qualify for the shorter 10-day quarantine. I'll support you at each stage of the timeline wherever I can.",
   },
 ];
 

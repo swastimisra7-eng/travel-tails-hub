@@ -43,8 +43,9 @@ const services = [
     icon: Plane,
     title: "Australia Export Certification",
     description:
-      "Australia has some of the strictest biosecurity rules in the world. I'll guide you through the Export Health Certificate process, with examinations done at your home.",
+      "Australia has some of the strictest biosecurity rules in the world. As an OV66-authorised vet, I'll guide you through the Export Health Certificate process, with examinations done at your home.",
     points: [
+      "OV66 authorised — helps your pet qualify for 10-day quarantine in Australia instead of 30 days",
       "ID check and ID declaration",
       "RNATT: I certify the laboratory results once the blood draw has been completed by another OV",
       "Liaison with your chosen pet transport agent",
