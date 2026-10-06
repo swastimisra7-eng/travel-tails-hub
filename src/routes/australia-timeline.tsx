@@ -79,7 +79,6 @@ const milestones: Milestone[] = [
     points: [
       "Each vet takes a colour photo of your pet with the microchip number visible on the scanner",
       "The second ID check date counts as the official verification date",
-      "If the ID photos aren't accepted, your pet may only qualify for 30-day quarantine — I make sure they're right first time",
     ],
     highlight: true,
   },
@@ -90,7 +89,7 @@ const milestones: Milestone[] = [
     title: "RNATT blood test",
     body: "The rabies antibody blood sample must be taken by an OV66-authorised vet, on or after the second identity check, and tested at an approved laboratory. The result must be at least 0.5 IU/ml.",
     points: [
-      "I don't take blood samples myself — the draw is done by another OV66 vet (this can be the same day as the second ID check)",
+      "Blood testing is not a service I currently offer — the draw is done by another OV66 vet and can be done the same day as your second ID check",
       "Once the laboratory report is issued, I certify the results and complete the RNATT declaration",
     ],
     highlight: true,
@@ -111,7 +110,7 @@ const milestones: Milestone[] = [
     countdown: "Weeks before travel",
     icon: FileCheck2,
     title: "Final tests, treatments & Export Health Certificate",
-    body: "Any remaining tests and treatments required by the certificate are completed (microchip verified each time). I then examine your pet at home, certify the Export Health Certificate, and endorse all lab reports and declarations.",
+    body: "Any remaining tests and treatments required by the certificate are completed (with your pet's microchip verified each time) by either myself or your primary care veterinarian (MRCVS). Finally, I examine your pet at home, certify the Export Health Certificate, and endorse all lab reports and declarations.",
     points: [
       "The certifying vet must be different from the vet who took the blood sample",
       "Everything is checked and stamped before your pet travels",
