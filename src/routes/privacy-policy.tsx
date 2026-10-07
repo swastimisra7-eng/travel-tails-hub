@@ -16,7 +16,7 @@ export const Route = createFileRoute("/privacy-policy")({
   component: PrivacyPolicy,
 });
 
-const LAST_UPDATED = "5 October 2026";
+const LAST_UPDATED = "7 October 2026";
 
 const lawfulBases = [
   [
@@ -77,7 +77,7 @@ const recipients: { who: string; what: string; why: string; notice: string; href
   },
   {
     who: "Netlify",
-    what: "Website enquiry form submissions",
+    what: "Website enquiry form submissions, including any uploaded files",
     why: "Hosts the website and receives the enquiry form",
     notice: "Netlify privacy policy",
     href: "https://www.netlify.com/privacy/",
@@ -186,6 +186,7 @@ function PrivacyPolicy() {
             <li>Basic details about your pet(s), such as species, breed and age</li>
             <li>Your preferred times for a home visit</li>
             <li>Anything else you choose to tell us in the message box</li>
+            <li>Any clinical notes or veterinary records you choose to upload with your enquiry</li>
           </ul>
           <p className="font-semibold text-foreground">
             When we carry out a visit or issue a certificate:
