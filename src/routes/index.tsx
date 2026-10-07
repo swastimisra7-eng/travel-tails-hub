@@ -40,8 +40,8 @@ function Index() {
           </h1>
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground">
             Animal Health Certificates for EU travel, and OV66 authorised export certification for
-            Australia — completed by an Official Veterinarian in the comfort of your own home, so
-            your pet stays calm and you skip the clinic trip.
+            Australia offered across London — completed by an Official Veterinarian in the comfort
+            of your own home, so your pet stays calm and you skip the clinic trip.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
