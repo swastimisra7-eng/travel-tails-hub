@@ -32,6 +32,14 @@ export function SiteFooter() {
           <Link to="/privacy-policy" className={linkCls}>
             Privacy Policy
           </Link>
+          <a
+            href="/terms-and-conditions.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkCls}
+          >
+            Terms and Conditions
+          </a>
         </div>
       </div>
     </footer>
