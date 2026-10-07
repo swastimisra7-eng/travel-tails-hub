@@ -2,6 +2,8 @@ import { useState, type FormEvent } from "react";
 import { AvailabilityPicker } from "@/components/AvailabilityPicker";
 
 const SPECIES = ["Dog", "Cat", "Ferret"];
+
+type Pet = { name: string; species: string };
 // Up to five pets can travel on one AHC.
 const MAX_PETS = 5;
 // Netlify Forms: one file per field, 8 MB per submission in total.
@@ -26,12 +28,15 @@ function Req() {
 export function EnquiryForm() {
   const [travelDate, setTravelDate] = useState("");
   const [availability, setAvailability] = useState("");
-  const [pets, setPets] = useState<string[]>([""]);
+  const [pets, setPets] = useState<Pet[]>([{ name: "", species: "" }]);
   const [fileSlots, setFileSlots] = useState(1);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
 
-  const petsSummary = pets.filter(Boolean).join(", ");
+  const petsSummary = pets
+    .filter((p) => p.name.trim() || p.species)
+    .map((p) => `${p.name.trim() || "Unnamed"} (${p.species || "type not given"})`)
+    .join(", ");
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -41,18 +46,30 @@ export function EnquiryForm() {
     fd.set("form-name", "enquiry");
     fd.set("availability", availability);
     fd.set("pets", petsSummary);
-    // A unique subject per enquiry, so Gmail doesn't group them into one thread.
-    // %{submissionId} is filled in by Netlify.
+    // Subject: "<Last name> - <pet names> - <service> - <travel date>". Each enquiry gets
+    // its own subject, so Gmail shows it as a separate email rather than one thread.
     const travel = String(fd.get("travel_date") || "");
     const travelLabel = travel
       ? new Date(`${travel}T00:00:00`).toLocaleDateString("en-GB", {
           day: "numeric",
           month: "short",
+          year: "numeric",
         })
       : "date TBC";
+    const petNames = pets
+      .map((p) => p.name.trim())
+      .filter(Boolean)
+      .join(", ");
     fd.set(
       "subject",
-      `New enquiry: ${String(fd.get("name") || "").trim()} · ${String(fd.get("service") || "")} · travelling ${travelLabel} (ref %{submissionId})`,
+      [
+        String(fd.get("last_name") || "").trim(),
+        petNames,
+        String(fd.get("service") || ""),
+        travelLabel,
+      ]
+        .filter(Boolean)
+        .join(" - "),
     );
     const uploadBytes = [...fd.values()].reduce(
       (sum, v) => sum + (v instanceof File ? v.size : 0),
@@ -104,7 +121,7 @@ export function EnquiryForm() {
       </p>
       <input type="hidden" name="availability" value={availability} />
       <input type="hidden" name="pets" value={petsSummary} />
-      <input type="hidden" name="subject" value="New enquiry (ref %{submissionId})" />
+      <input type="hidden" name="subject" value="New enquiry" />
 
       <p className="mb-5 text-xs text-muted-foreground">
         <span className="text-destructive">*</span> Required
@@ -135,9 +152,14 @@ export function EnquiryForm() {
           </label>
         </div>
         <label className={labelCls}>
-          Your name
+          First name
           <Req />
-          <input name="name" required className={inputCls} autoComplete="name" />
+          <input name="first_name" required className={inputCls} autoComplete="given-name" />
+        </label>
+        <label className={labelCls}>
+          Last name
+          <Req />
+          <input name="last_name" required className={inputCls} autoComplete="family-name" />
         </label>
         <label className={labelCls}>
           Email address
@@ -177,24 +199,38 @@ export function EnquiryForm() {
             className={inputCls}
           />
         </label>
-        <fieldset>
+        <fieldset className="md:col-span-2">
           <legend className={labelCls}>
             Your pet(s)
             <Req />
           </legend>
           <div className="space-y-2">
-            {pets.map((species, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <select
-                  aria-label={`Pet ${i + 1}`}
+            {pets.map((pet, i) => (
+              <div key={i} className="flex items-start gap-2">
+                <input
+                  aria-label={`Pet ${i + 1} name`}
                   required
-                  value={species}
+                  placeholder="Pet's name"
+                  value={pet.name}
                   onChange={(e) =>
-                    setPets((prev) => prev.map((p, j) => (j === i ? e.target.value : p)))
+                    setPets((prev) =>
+                      prev.map((p, j) => (j === i ? { ...p, name: e.target.value } : p)),
+                    )
                   }
                   className={inputCls}
+                />
+                <select
+                  aria-label={`Pet ${i + 1} type`}
+                  required
+                  value={pet.species}
+                  onChange={(e) =>
+                    setPets((prev) =>
+                      prev.map((p, j) => (j === i ? { ...p, species: e.target.value } : p)),
+                    )
+                  }
+                  className={`${inputCls} max-w-[9rem]`}
                 >
-                  <option value="">Select a pet</option>
+                  <option value="">Type</option>
                   {SPECIES.map((sp) => (
                     <option key={sp}>{sp}</option>
                   ))}
@@ -215,7 +251,7 @@ export function EnquiryForm() {
           {pets.length < MAX_PETS && (
             <button
               type="button"
-              onClick={() => setPets((prev) => [...prev, ""])}
+              onClick={() => setPets((prev) => [...prev, { name: "", species: "" }])}
               className="mt-3 rounded-full border border-border bg-background px-4 py-1.5 text-sm font-semibold transition-colors hover:bg-secondary"
             >
               + Add pet
