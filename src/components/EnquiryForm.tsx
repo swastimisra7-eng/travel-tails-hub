@@ -41,6 +41,19 @@ export function EnquiryForm() {
     fd.set("form-name", "enquiry");
     fd.set("availability", availability);
     fd.set("pets", petsSummary);
+    // A unique subject per enquiry, so Gmail doesn't group them into one thread.
+    // %{submissionId} is filled in by Netlify.
+    const travel = String(fd.get("travel_date") || "");
+    const travelLabel = travel
+      ? new Date(`${travel}T00:00:00`).toLocaleDateString("en-GB", {
+          day: "numeric",
+          month: "short",
+        })
+      : "date TBC";
+    fd.set(
+      "subject",
+      `New enquiry: ${String(fd.get("name") || "").trim()} · ${String(fd.get("service") || "")} · travelling ${travelLabel} (ref %{submissionId})`,
+    );
     const uploadBytes = [...fd.values()].reduce(
       (sum, v) => sum + (v instanceof File ? v.size : 0),
       0,
@@ -91,6 +104,7 @@ export function EnquiryForm() {
       </p>
       <input type="hidden" name="availability" value={availability} />
       <input type="hidden" name="pets" value={petsSummary} />
+      <input type="hidden" name="subject" value="New enquiry (ref %{submissionId})" />
 
       <p className="mb-5 text-xs text-muted-foreground">
         <span className="text-destructive">*</span> Required
