@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { FileCheck2, Plane, Stethoscope } from "lucide-react";
+import { FileCheck2, Info, Plane, Stethoscope } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 
 export const Route = createFileRoute("/pricing")({
@@ -98,6 +98,22 @@ function Pricing() {
             >
               Get a quote
             </Link>
+          </div>
+          <div className="mt-4 flex items-start gap-3 rounded-2xl border border-primary/30 bg-primary/10 px-6 py-5">
+            <Info className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+            <p className="text-sm text-muted-foreground">
+              <span className="font-semibold text-foreground">£50 deposit for all services.</span> A
+              £50 deposit is taken when you book and comes off your final fee. It's fully refundable
+              if you cancel more than 72 hours before your appointment.{" "}
+              <a
+                href="/terms-and-conditions.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-primary underline underline-offset-2"
+              >
+                Terms and Conditions
+              </a>
+            </p>
           </div>
         </div>
       </section>
