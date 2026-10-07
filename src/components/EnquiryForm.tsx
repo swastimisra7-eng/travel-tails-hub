@@ -4,6 +4,10 @@ import { AvailabilityPicker } from "@/components/AvailabilityPicker";
 const SPECIES = ["Dog", "Cat", "Ferret"];
 // Up to five pets can travel on one AHC.
 const MAX_PETS = 5;
+// Netlify Forms: one file per field, 8 MB per submission in total.
+const MAX_FILES = 3;
+const MAX_UPLOAD_BYTES = 8 * 1024 * 1024;
+const ACCEPTED_FILES = ".pdf,.jpg,.jpeg,.png,.heic,.doc,.docx";
 
 const inputCls =
   "mt-1.5 w-full rounded-xl border border-input bg-background px-4 py-2.5 text-sm text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-primary/30";
@@ -23,6 +27,7 @@ export function EnquiryForm() {
   const [travelDate, setTravelDate] = useState("");
   const [availability, setAvailability] = useState("");
   const [pets, setPets] = useState<string[]>([""]);
+  const [fileSlots, setFileSlots] = useState(1);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
 
@@ -36,14 +41,20 @@ export function EnquiryForm() {
     fd.set("form-name", "enquiry");
     fd.set("availability", availability);
     fd.set("pets", petsSummary);
-    const body = new URLSearchParams();
-    fd.forEach((v, k) => body.append(k, String(v)));
+    const uploadBytes = [...fd.values()].reduce(
+      (sum, v) => sum + (v instanceof File ? v.size : 0),
+      0,
+    );
+    if (uploadBytes > MAX_UPLOAD_BYTES) {
+      setStatus("idle");
+      setError(
+        "Your files add up to more than 8 MB. Please remove one, or ask your vet to email them to me.",
+      );
+      return;
+    }
     try {
-      const res = await fetch("/__forms.html", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: body.toString(),
-      });
+      // Sent as multipart so uploaded files come through; the browser sets the Content-Type.
+      const res = await fetch("/__forms.html", { method: "POST", body: fd });
       if (!res.ok) throw new Error(String(res.status));
       setStatus("success");
     } catch {
@@ -68,6 +79,7 @@ export function EnquiryForm() {
       method="POST"
       data-netlify="true"
       netlify-honeypot="bot-field"
+      encType="multipart/form-data"
       onSubmit={onSubmit}
       className="rounded-2xl bg-card p-6 text-left text-foreground md:p-8"
     >
@@ -211,6 +223,46 @@ export function EnquiryForm() {
         <span className="font-normal text-muted-foreground">(the more details, the better)</span>
         <textarea name="message" rows={4} className={inputCls} />
       </label>
+
+      <fieldset className="mt-6">
+        <legend className={labelCls}>
+          Clinical notes from your vet{" "}
+          <span className="font-normal text-muted-foreground">
+            (optional — PDF, photo or Word, up to 8 MB in total)
+          </span>
+        </legend>
+        <div className="mt-2 space-y-2">
+          {Array.from({ length: fileSlots }, (_, i) => (
+            <input
+              key={i}
+              type="file"
+              name={`clinical_notes_${i + 1}`}
+              accept={ACCEPTED_FILES}
+              aria-label={`Clinical notes file ${i + 1}`}
+              className="block w-full rounded-xl border border-input bg-background text-sm text-muted-foreground file:mr-3 file:border-0 file:border-r file:border-input file:bg-secondary file:px-4 file:py-2.5 file:text-sm file:font-semibold file:text-foreground hover:file:bg-secondary/70"
+            />
+          ))}
+        </div>
+        {fileSlots < MAX_FILES && (
+          <button
+            type="button"
+            onClick={() => setFileSlots((n) => n + 1)}
+            className="mt-3 rounded-full border border-border bg-background px-4 py-1.5 text-sm font-semibold transition-colors hover:bg-secondary"
+          >
+            + Add another file
+          </button>
+        )}
+        <p className="mt-3 text-xs text-muted-foreground">
+          Unable to upload? Ask your vet to email the notes directly to{" "}
+          <a
+            href="mailto:swasti@petpermit.co.uk"
+            className="font-medium text-primary underline underline-offset-2"
+          >
+            swasti@petpermit.co.uk
+          </a>
+          .
+        </p>
+      </fieldset>
 
       {error && (
         <p className="mt-4 text-sm font-medium text-destructive" role="alert">
